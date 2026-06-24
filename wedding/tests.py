@@ -54,3 +54,21 @@ class WeddingCommentTests(TestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertFalse(CommentWedding.objects.exists())
+
+    def test_uploaded_logo_has_priority_over_default_monogram(self):
+        self.first_wedding.logo.name = "logo/custom-wedding-logo.png"
+        self.first_wedding.save(update_fields=["logo"])
+
+        response = self.client.get(
+            reverse("home", kwargs={"pk": self.first_wedding.pk})
+        )
+
+        self.assertContains(response, "/media/logo/custom-wedding-logo.png")
+        self.assertNotContains(response, "img/oz-monogram.webp")
+
+    def test_default_monogram_is_used_without_uploaded_logo(self):
+        response = self.client.get(
+            reverse("home", kwargs={"pk": self.second_wedding.pk})
+        )
+
+        self.assertContains(response, "img/oz-monogram.webp")

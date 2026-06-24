@@ -2038,6 +2038,13 @@ body {
   filter: drop-shadow(0 5px 10px rgba(86, 43, 31, .3));
 }
 
+#header .hd-logo img.custom-wedding-logo {
+  width: auto;
+  max-width: 100%;
+  max-height: 94px;
+  object-fit: contain;
+}
+
 .hd-list-menu > li > a .link-title {
   color: var(--wedding-wine);
   font-weight: 600;
@@ -2495,6 +2502,11 @@ body {
 
   #header .hd-logo img.oz-monogram {
     width: 58px;
+  }
+
+  #header .hd-logo img.custom-wedding-logo {
+    width: auto;
+    max-height: 54px;
   }
 
   #header .hd-list-menu {

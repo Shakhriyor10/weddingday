@@ -31,7 +31,11 @@
 
 				    </nav>
                     <div class="hd-logo">
-                        <a href="{% url 'home' wedding.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
+                        {% if wedding.logo %}
+                            <a href="{% url 'home' wedding.pk %}" aria-label="Bosh sahifa"><img src="{{ wedding.logo.url }}" class="logo-img custom-wedding-logo" title="{{ wedding.groom_name }}{% if wedding.bride_name %} va {{ wedding.bride_name }}{% endif %}" alt="To‘y logotipi"></a>
+                        {% else %}
+                            <a href="{% url 'home' wedding.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
+                        {% endif %}
 				    </div>
                     <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
 				      <ul class="nav navbar-nav hd-list-menu clearfix">
