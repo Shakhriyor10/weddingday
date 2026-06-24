@@ -1,1 +1,133 @@
-import pytzfrom django.db.models import Case, IntegerField, Value, Whenfrom django.http import HttpResponseRedirect, JsonResponsefrom django.shortcuts import render, get_object_or_404from django.urls import reversefrom django.views.generic import ListView, TemplateView, DetailViewfrom datetime import datetime, timedelta, timezonefrom desire.models import OurDesirefrom wedding.context_processor import back_sliderfrom wedding.models import WeddingDay, Artists, WeddingDishes, Slider, CommentWeddingclass WeddingDetailView(TemplateView):    template_name = 'home.html'    def get_context_data(self, **kwargs):        context = super(WeddingDetailView, self).get_context_data(**kwargs)        context['desire'] = OurDesire.objects.filter(status=True).order_by('-id')[:1].get()        context['wedding'] = WeddingDay.objects.prefetch_related('wed_dish', 'wedding_kids', 'wedding_more').filter(            status=True).get(id=self.kwargs['pk'])        context['wedding_photo'] = Slider.objects.filter(wedding_id=self.kwargs['pk'])        return contextclass HotAppetizersList(TemplateView):    template_name = 'kitchen.html'    def get_context_data(self, **kwargs):        global wedding_pk_kitchen        context = super(HotAppetizersList, self).get_context_data(**kwargs)        context['wedding'] = WeddingDay.objects.prefetch_related('wed_dish').filter(            status=True).order_by('-id').first()        wedding_id = WeddingDay.objects.get(id=self.kwargs['pk'])        context['kitchen'] = WeddingDishes.objects.filter(wedding_id=wedding_id, dishes_type='hot_snack').order_by(            'time')        context['dishes'] = WeddingDishes.objects.filter(wedding_id=wedding_id, dishes_type='dishes').order_by(            'time')        context['second_dishes'] = WeddingDishes.objects.filter(wedding_id=wedding_id,                                                                dishes_type='second_dishes').order_by(            'time')        context['desert'] = WeddingDishes.objects.filter(wedding_id=wedding_id, dishes_type='desert').order_by(            'time')        context['wedding_photo'] = Slider.objects.filter(wedding_id=self.kwargs['pk'])        context['comments'] = CommentWedding.objects.filter(wedding_id=wedding_id).order_by('-id')        wedding_id_date = wedding_id.date        date_now = datetime.now()        if date_now.tzinfo is not None:            date_now = date_now.replace(tzinfo=None)        formatted_datetime = date_now.strftime("%Y-%m-%d %H:%M:%S")        date_now_again = datetime.strptime(formatted_datetime, "%Y-%m-%d %H:%M:%S")        tz_tashkent = pytz.timezone('Asia/Tashkent')        wedding_id_date = wedding_id_date.astimezone(tz_tashkent).replace(tzinfo=None)        end_date = (wedding_id_date + timedelta(hours=24)).replace(tzinfo=None)        remaining_time = end_date - date_now_again        context['hours'] = remaining_time.seconds // 3600        context['minutes'] = (remaining_time.seconds // 60) % 60        # context['remaining_time'] = remaining_time        context['current_datetime'] = date_now_again        context['wedding_date'] = wedding_id_date        context['end_date'] = end_date        wedding_pk_kitchen = self.kwargs.get('pk')        # print(wedding_pk_kitchen)        # print(wedding_pk)        context['wedding_pk'] = get_object_or_404(WeddingDay, pk=wedding_pk_kitchen)        return context    def post(self, request, *args, **kwargs):        name = self.request.POST.get('name', '')        table = self.request.POST.get('table', '')        text = self.request.POST.get('text', '')        wedding = WeddingDay.objects.get(pk=self.kwargs['pk'])        if table.isdigit():            table = int(table)        else:            table = None        CommentWedding.objects.create(name=name,                                      table=table,                                      text=text,                                      wedding_id=wedding_pk_kitchen)        return JsonResponse({'message': 'Success'})        # return HttpResponseRedirect(reverse('hot_appetizers', kwargs={'pk': wedding_pk_kitchen}))class ArtistList(TemplateView):    template_name = 'artists.html'    def get_context_data(self, **kwargs):        global wedding_pk        context = super(ArtistList, self).get_context_data(**kwargs)        context['wedding'] = WeddingDay.objects.prefetch_related('wed_dish').filter(            status=True).order_by('-id').first()        wedding_id = WeddingDay.objects.get(id=self.kwargs['pk'])        context['organizer'] = Artists.objects.filter(wedding_id=wedding_id, type_is='organizer').order_by('position')        context['leading'] = Artists.objects.filter(wedding_id=wedding_id, type_is='leading').order_by('position')        context['artists'] = Artists.objects.filter(wedding_id=wedding_id, type_is__in=['artist', 'group']).order_by(            'position')        context['dance_group'] = Artists.objects.filter(wedding_id=wedding_id, type_is='dance_group').order_by(            'position')        context['wedding_photo'] = Slider.objects.filter(wedding_id=self.kwargs['pk'])        context['comments'] = CommentWedding.objects.filter(wedding_id=wedding_id).order_by('-id')        wedding_id_date = wedding_id.date        date_now = datetime.now()        if date_now.tzinfo is not None:            date_now = date_now.replace(tzinfo=None)        formatted_datetime = date_now.strftime("%Y-%m-%d %H:%M:%S")        date_now_again = datetime.strptime(formatted_datetime, "%Y-%m-%d %H:%M:%S")        tz_tashkent = pytz.timezone('Asia/Tashkent')        wedding_id_date = wedding_id_date.astimezone(tz_tashkent).replace(tzinfo=None)        end_date = (wedding_id_date + timedelta(hours=24)).replace(tzinfo=None)        remaining_time = end_date - date_now_again        context['hours'] = remaining_time.seconds // 3600        context['minutes'] = (remaining_time.seconds // 60) % 60        # context['remaining_time'] = remaining_time        context['current_datetime'] = date_now_again        context['wedding_date'] = wedding_id_date        context['end_date'] = end_date        wedding_pk = self.kwargs.get('pk')        context['wedding_pk'] = get_object_or_404(WeddingDay, pk=wedding_pk)        return context    def post(self, request, *args, **kwargs):        name = self.request.POST.get('name', '')        table = self.request.POST.get('table', '')        text = self.request.POST.get('text', '')        wedding = WeddingDay.objects.get(pk=self.kwargs['pk'])        if table.isdigit():            table = int(table)        else:            table = None        CommentWedding.objects.create(name=name,                                      table=table,                                      text=text,                                      wedding_id=wedding_pk)        return JsonResponse({'message': 'Success'})
+from datetime import timedelta
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from desire.models import OurDesire
+from wedding.models import Artists, CommentWedding, Slider, WeddingDay, WeddingDishes
+
+
+class WeddingCommentMixin:
+    """Shared wedding lookup, comment context and safe comment creation."""
+
+    def get_wedding(self):
+        if not hasattr(self, "_wedding"):
+            self._wedding = get_object_or_404(
+                WeddingDay.objects.prefetch_related(
+                    "wed_dish", "wedding_kids", "wedding_more"
+                ),
+                pk=self.kwargs["pk"],
+                status=True,
+            )
+        return self._wedding
+
+    def add_comment_context(self, context):
+        wedding = self.get_wedding()
+        now = timezone.localtime()
+        wedding_date = timezone.localtime(wedding.date)
+        end_date = wedding_date + timedelta(hours=24)
+        remaining_seconds = max(0, int((end_date - now).total_seconds()))
+
+        context.update(
+            {
+                "wedding": wedding,
+                "wedding_pk": wedding,
+                "comments": CommentWedding.objects.filter(wedding=wedding).order_by(
+                    "-date_time"
+                ),
+                "current_datetime": now,
+                "wedding_date": wedding_date,
+                "end_date": end_date,
+                "hours": remaining_seconds // 3600,
+                "minutes": (remaining_seconds % 3600) // 60,
+            }
+        )
+        return context
+
+    def post(self, request, *args, **kwargs):
+        wedding = self.get_wedding()
+        text = request.POST.get("text", "").strip()
+        name = request.POST.get("name", "").strip()[:255]
+        table_value = request.POST.get("table", "").strip()
+
+        if not text:
+            return JsonResponse(
+                {"message": "Напишите пожелание перед отправкой."}, status=400
+            )
+
+        table = int(table_value) if table_value.isdigit() else None
+        if table is not None and table <= 0:
+            table = None
+
+        comment = CommentWedding.objects.create(
+            wedding=wedding,
+            name=name or None,
+            table=table,
+            text=text,
+        )
+        return JsonResponse(
+            {
+                "message": "Пожелание сохранено",
+                "comment": {
+                    "id": comment.pk,
+                    "name": comment.name or "Гость",
+                    "table": comment.table,
+                    "text": comment.text,
+                    "date_time": timezone.localtime(comment.date_time).isoformat(),
+                },
+            },
+            status=201,
+        )
+
+
+class WeddingDetailView(WeddingCommentMixin, TemplateView):
+    template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.add_comment_context(context)
+        context["desire"] = OurDesire.objects.filter(status=True).order_by("-id").first()
+        context["wedding_photo"] = Slider.objects.filter(wedding=self.get_wedding(), status=True)
+        return context
+
+
+class HotAppetizersList(WeddingCommentMixin, TemplateView):
+    template_name = "kitchen.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        wedding = self.get_wedding()
+        self.add_comment_context(context)
+        dishes = WeddingDishes.objects.filter(wedding=wedding).order_by("time")
+        context.update(
+            {
+                "kitchen": dishes.filter(dishes_type="hot_snack"),
+                "dishes": dishes.filter(dishes_type="dishes"),
+                "second_dishes": dishes.filter(dishes_type="second_dishes"),
+                "desert": dishes.filter(dishes_type="desert"),
+                "wedding_photo": Slider.objects.filter(wedding=wedding, status=True),
+            }
+        )
+        return context
+
+
+class ArtistList(WeddingCommentMixin, TemplateView):
+    template_name = "artists.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        wedding = self.get_wedding()
+        self.add_comment_context(context)
+        artists = Artists.objects.filter(wedding=wedding).order_by("position")
+        context.update(
+            {
+                "organizer": artists.filter(type_is="organizer"),
+                "leading": artists.filter(type_is="leading"),
+                "artists": artists.filter(type_is__in=["artist", "group"]),
+                "dance_group": artists.filter(type_is="dance_group"),
+                "wedding_photo": Slider.objects.filter(wedding=wedding, status=True),
+            }
+        )
+        return context

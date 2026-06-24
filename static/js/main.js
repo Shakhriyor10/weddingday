@@ -13,20 +13,6 @@ $(window).load(function(){
 	}); 	
   
 
-  //Viewport
-  var windowHeight = $(window).height();
-
-  function adjustViewport() {
-    $('.viewport').css('min-height', windowHeight);
-  }
-
-  adjustViewport();
-
-  $(window).resize(function(){
-    windowHeight = $(window).height();
-    adjustViewport();
-  });
-
   var $container = $('#mansonry');
   // initialize Masonry after all images have loaded  
   $container.imagesLoaded( function() {

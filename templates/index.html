@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +17,8 @@
 <!-- >> CSS	
 ============================================================================== -->
 <!-- google web fonts -->
-<link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 <!-- /google web fonts -->
 <!-- bootstrap -->
 <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -91,7 +91,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!-- Validate -->
-<script src="{% static 'vendor/validate.j' %}"></script>
+<script src="{% static 'vendor/validate.js' %}"></script>
 <!-- Countdown -->
 <script src="{% static 'vendor/jquery.countdown.min.js' %}"></script>
 <!-- Mansonry -->
@@ -101,8 +101,6 @@
 <script src="{% static 'vendor/nivo-lightbox/nivo-lightbox.min.js' %}"></script>
 <!-- Cycle -->
 <script src="{% static 'vendor/cycle2.js' %}"></script>
-<!-- SmoothScroll -->
-<script src="{% static 'vendor/smoothScroll.js' %}"></script>
 <!-- Placeholder for IE -->
 <script src="{% static 'vendor/placeholders.jquery.min.js' %}"></script>
 <!-- Crossbrowser -->
@@ -152,18 +150,14 @@
         {% for photo in wedding_photo %}
             "{{ photo.mob_photo.url }}",
         {% endfor %}
-            {% else %}
-            "{% static 'img/mob-backg.jpg' %}",
-            "{% static 'img/mob-backg2.jpg' %}",
-            "{% static 'img/mob-backg3.jpg' %}",
-            "{% static 'img/mob-backg4.jpg' %}"
+        {% else %}
+            "{% static 'img/wedding-hero-mobile.webp' %}"
     {% endif %}
     ];
 
     var desktopImages = [
-        "{% static 'img/backg.jpg' %}",
-        "{% static 'img/backg2.jpg' %}",
-        "{% static 'img/backg3.jpg' %}"
+        "{% static 'img/wedding-hero-ballroom.webp' %}",
+        "{% static 'img/wedding-hero-garden.webp' %}"
     ];
 
     // Установка фотографий в слайдшоу
@@ -204,6 +198,14 @@
     }
 </script>
 <script>
+(function () {
+    const celebrationCanvas = document.getElementById('canvas');
+    if (!celebrationCanvas) return;
+    if (window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches) {
+        celebrationCanvas.style.display = 'none';
+        return;
+    }
+
     window.requestAnimFrame = ( function() {
 	return window.requestAnimationFrame ||
 				window.webkitRequestAnimationFrame ||
@@ -474,6 +476,7 @@ canvas.addEventListener( 'mouseup', function( e ) {
 
 // once the window loads, we are ready for some fireworks!
 window.onload = loop;
+}());
 </script>
 {% block extra_js %}
 

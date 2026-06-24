@@ -553,15 +553,23 @@ p {
 }
 .page-home {
   padding-top: 20px;
+  min-height: 700px;
 }
 @media (min-width: 768px) {
   .page-home {
     padding-top: 30px;
+    min-height: 720px;
   }
 }
 @media (min-width:992px) {
   .page-home {
     padding-top: 50px;
+    min-height: 780px;
+  }
+}
+@media (min-width:1200px) {
+  .page-home {
+    min-height: 820px;
   }
 }
 #countdown {
@@ -1937,6 +1945,608 @@ textarea.form-control {
 .ie9 #page-loader,
 .ie8 #page-loader {
   display: none !important;
+}
+
+/* ==========================================================
+! WEDDING DAY — refined romantic layer
+========================================================== */
+:root {
+  --wedding-wine: #4d272e;
+  --wedding-rose: #c9888d;
+  --wedding-gold: #d7b577;
+  --wedding-ivory: #fffaf3;
+  --wedding-ink: #412f32;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 24px;
+}
+
+body {
+  min-height: 100vh;
+  overscroll-behavior-y: none;
+}
+
+.viewport {
+  min-height: 100vh;
+}
+
+@supports (height: 100svh) {
+  .viewport,
+  #body,
+  #body > .container {
+    min-height: 100svh;
+  }
+}
+
+#body,
+#body > .container {
+  min-height: 100vh;
+}
+
+#body > .container,
+.boxed-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-mask {
+  background: linear-gradient(135deg, rgba(31, 17, 21, .48), rgba(78, 42, 48, .22));
+}
+
+.boxed-content {
+  min-height: calc(100vh - 60px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 26px;
+  background: rgba(54, 31, 35, .50);
+  box-shadow: 0 28px 80px rgba(19, 8, 12, .34);
+  backdrop-filter: blur(6px);
+}
+
+#header.navbar-default {
+  border-bottom: 1px solid rgba(215, 181, 119, .3);
+  background: linear-gradient(90deg, rgba(255, 250, 243, .90), rgba(251, 239, 230, .87));
+  box-shadow: 0 12px 36px rgba(44, 21, 25, .15);
+}
+
+#header .hd-logo img.oz-monogram {
+  width: 94px;
+  max-width: 100%;
+  filter: drop-shadow(0 3px 7px rgba(86, 43, 31, .22));
+  transition: transform .25s ease, filter .25s ease;
+}
+
+#header .hd-logo a:hover img.oz-monogram {
+  transform: translateY(-2px) scale(1.04);
+  filter: drop-shadow(0 5px 10px rgba(86, 43, 31, .3));
+}
+
+.hd-list-menu > li > a .link-title {
+  color: var(--wedding-wine);
+  font-weight: 600;
+  letter-spacing: .04em;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.hd-list-menu > li > a:hover .link-title {
+  color: var(--wedding-rose);
+  transform: translateY(-1px);
+}
+
+#header.navbar-default .hd-list-menu > li,
+#header.navbar-default .hd-list-menu > li:hover,
+#header.navbar-default .hd-list-menu > li.active,
+#header.navbar-default .hd-list-menu > li:focus-within {
+  background: transparent !important;
+}
+
+#header.navbar-default .hd-list-menu > li > a,
+#header.navbar-default .hd-list-menu > li > a:hover,
+#header.navbar-default .hd-list-menu > li > a:focus,
+#header.navbar-default .hd-list-menu > li > a:active,
+#header.navbar-default .hd-list-menu > li.active > a,
+#header.navbar-default .navbar-nav > .active > a:hover,
+#header.navbar-default .navbar-nav > .active > a:focus {
+  background: transparent !important;
+  color: var(--wedding-wine) !important;
+  box-shadow: none !important;
+}
+
+#header.navbar-default .hd-list-menu > li > a .link-title,
+#header.navbar-default .hd-list-menu > li > a:hover .link-title,
+#header.navbar-default .hd-list-menu > li > a:focus .link-title,
+#header.navbar-default .hd-list-menu > li.active > a .link-title {
+  color: var(--wedding-wine) !important;
+}
+
+#header.navbar-default .hd-list-menu > li.active > a::after,
+#header.navbar-default .hd-list-menu > li > a[aria-current="page"]::after {
+  width: 100%;
+  height: 3px;
+  background: var(--wedding-gold);
+}
+
+.couple-title {
+  text-shadow: 0 3px 22px rgba(20, 7, 12, .5);
+}
+
+.countdown-title-borders {
+  border-color: rgba(215, 181, 119, .75) !important;
+  text-shadow: 0 2px 16px rgba(18, 7, 10, .45);
+}
+
+.wishes-panel {
+  position: relative;
+  margin: 22px 28px 36px;
+  padding: 38px;
+  border: 1px solid rgba(215, 181, 119, .4);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255, 250, 243, .88), rgba(247, 232, 225, .82));
+  color: var(--wedding-ink);
+  box-shadow: 0 20px 55px rgba(26, 10, 14, .22);
+}
+
+.wishes-panel::before {
+  content: "♡";
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  color: rgba(201, 136, 141, .28);
+  font: 64px/1 'Great Vibes', cursive;
+}
+
+.wishes-heading {
+  max-width: 620px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.wishes-kicker {
+  color: var(--wedding-rose);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.wishes-heading h2 {
+  margin: 8px 0;
+  color: var(--wedding-wine);
+  font: 44px/1.15 'Great Vibes', cursive;
+}
+
+.wishes-heading p,
+.wish-card p {
+  color: #6d575a;
+}
+
+.wishes-form {
+  max-width: 720px;
+  margin: 0 auto 34px;
+}
+
+.wishes-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.wishes-form label {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--wedding-wine);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.wishes-form input,
+.wishes-form textarea,
+.well .form-control {
+  width: 100%;
+  margin-top: 7px;
+  border: 1px solid rgba(105, 66, 72, .2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .72);
+  color: var(--wedding-ink);
+  box-shadow: inset 0 1px 2px rgba(45, 20, 24, .04);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.wishes-form input {
+  min-height: 54px;
+  padding: 14px 16px;
+  font-size: 15px;
+}
+
+.wishes-form textarea {
+  min-height: 128px;
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.wishes-form input:focus,
+.wishes-form textarea:focus,
+.well .form-control:focus {
+  border-color: var(--wedding-rose);
+  box-shadow: 0 0 0 4px rgba(201, 136, 141, .14);
+  outline: none;
+}
+
+.wishes-button,
+.well .btn-1c {
+  display: block;
+  min-width: 220px;
+  margin: 5px auto 0;
+  padding: 13px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--wedding-wine), #81505a);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .04em;
+  box-shadow: 0 10px 25px rgba(77, 39, 46, .25);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.wishes-button:hover,
+.well .btn-1c:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(77, 39, 46, .32);
+}
+
+.wishes-button:disabled {
+  cursor: wait;
+  opacity: .7;
+}
+
+.wishes-status,
+.wishes-notice,
+.wishes-empty {
+  margin: 14px 0 0;
+  color: #8a646a;
+  text-align: center;
+}
+
+.wishes-list {
+  display: grid;
+  max-width: 760px;
+  margin: 0 auto;
+  gap: 12px;
+}
+
+.wish-card {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(201, 136, 141, .18);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .58);
+  content-visibility: auto;
+  contain-intrinsic-size: 84px;
+}
+
+.wish-card-new,
+.media > div:first-child {
+  animation: wish-arrive .45s cubic-bezier(.2, .75, .25, 1) both;
+}
+
+@keyframes wish-arrive {
+  from { opacity: 0; transform: translateY(16px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wish-avatar {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e6bdba, #b87982);
+  color: #fff;
+  font: 25px 'Great Vibes', cursive;
+}
+
+.wish-card h3 {
+  margin: 1px 0 5px;
+  color: var(--wedding-wine);
+  font-size: 15px;
+}
+
+.wish-card h3 small,
+.wish-card time {
+  color: #a27f83;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.wish-card p {
+  margin-bottom: 6px;
+  white-space: pre-line;
+}
+
+.well {
+  margin: 20px auto;
+  border: 1px solid rgba(215, 181, 119, .35);
+  border-radius: 18px;
+  background: rgba(255, 250, 243, .84);
+  color: var(--wedding-ink);
+  box-shadow: 0 15px 38px rgba(30, 11, 16, .18);
+}
+
+.media {
+  margin: 12px 20px !important;
+  padding: 16px !important;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .08);
+}
+
+#footer {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(215, 181, 119, .28);
+  background: linear-gradient(135deg, rgba(68, 36, 42, .88), rgba(91, 55, 58, .84));
+  opacity: 1;
+}
+
+.comment-success-message {
+  margin: 14px 0 0;
+  color: #80545c;
+  text-align: center;
+  animation: wish-arrive .35s ease both;
+}
+
+.comment-form-card {
+  width: calc(100% - 32px);
+  max-width: 860px;
+  margin: 14px auto 20px;
+  padding: 28px;
+}
+
+.comment-form .row {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.comment-form .row > div {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.comment-form label {
+  color: var(--wedding-wine);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.comment-form .form-control {
+  min-height: 54px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.comment-form textarea.form-control {
+  min-height: 128px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.comments-section {
+  width: calc(100% - 32px);
+  max-width: 860px;
+  margin: 10px auto 24px;
+}
+
+.comments-section .blog-comments-title {
+  margin: 18px 0 14px;
+  color: #fff;
+  text-align: center;
+}
+
+.comments-list {
+  display: grid;
+  gap: 12px;
+}
+
+.comment-card {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 14px;
+  min-height: 88px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 16px;
+  background: rgba(255, 250, 243, .82);
+  color: var(--wedding-ink);
+  box-shadow: 0 10px 28px rgba(25, 9, 14, .16);
+}
+
+.comment-card-new {
+  animation: wish-arrive .45s cubic-bezier(.2, .75, .25, 1) both;
+}
+
+.comment-avatar {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e6bdba, #b87982);
+  color: #fff;
+  font: 25px 'Great Vibes', cursive;
+}
+
+.comment-card-body {
+  min-width: 0;
+}
+
+.comment-card h4 {
+  margin: 2px 0 7px;
+  color: var(--wedding-wine);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.comment-card h4 small,
+.comment-card time {
+  color: #a27f83;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.comment-card p {
+  margin: 0 0 7px;
+  color: #6d575a;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.comments-empty {
+  padding: 20px;
+  border: 1px dashed rgba(255, 255, 255, .3);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, .85);
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  html { scroll-behavior: auto; }
+  .boxed-content { border-radius: 18px; }
+  .boxed-content { backdrop-filter: none; }
+
+  #header.navbar-default {
+    overflow: hidden;
+    background: linear-gradient(90deg, rgba(255, 250, 243, .92), rgba(248, 236, 227, .88)) !important;
+    opacity: 1;
+  }
+
+  #header > .clearfix {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 76px minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  #header .hd-nav {
+    float: none !important;
+    width: 100% !important;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0;
+    background: transparent !important;
+  }
+
+  #header > .clearfix > .hd-nav:first-of-type {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #header > .clearfix > .hd-logo {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  #header > .clearfix > .hd-nav:last-of-type {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  #header .hd-logo {
+    display: grid;
+    width: 76px;
+    margin: 0;
+    padding: 9px 6px;
+    place-items: center;
+    border-right: 1px solid rgba(77, 39, 46, .16);
+    border-left: 1px solid rgba(77, 39, 46, .16);
+  }
+
+  #header .hd-logo img,
+  #header .logo-img {
+    width: 52px;
+    max-width: 100%;
+  }
+
+  #header .hd-logo img.oz-monogram {
+    width: 58px;
+  }
+
+  #header .hd-list-menu {
+    height: 100%;
+    padding: 0;
+    background: transparent !important;
+  }
+
+  #header .hd-list-menu li,
+  #header .hd-list-menu li a {
+    height: 100%;
+  }
+
+  #header .hd-list-menu li a {
+    display: flex;
+    min-height: 72px;
+    padding: 10px 5px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #header .hd-list-menu .link-title {
+    color: var(--wedding-wine) !important;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: .025em;
+    text-shadow: none;
+  }
+
+  .comment-form-card,
+  .comments-section {
+    width: auto;
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+
+  .comment-form-card {
+    margin-top: 10px;
+    padding: 20px 14px;
+  }
+
+  .comment-card {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 11px;
+    padding: 14px;
+  }
+
+  .comment-avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .wishes-panel { margin: 14px 10px 24px; padding: 26px 16px; }
+  .wishes-heading h2 { font-size: 37px; }
+  .wishes-form-row { grid-template-columns: 1fr; gap: 0; }
+  .wishes-panel::before { font-size: 45px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
 
 .no-dot-nav {
