@@ -1,17 +1,17 @@
 <section class="comments-section" aria-labelledby="comments-title">
-    <h4 id="comments-title" class="blog-comments-title">Комментарии</h4>
+    <h4 id="comments-title" class="blog-comments-title">Izohlar</h4>
     <div id="comments-list" class="comments-list">
         {% for comment in comments %}
             <article class="comment-card">
-                <div class="comment-avatar" aria-hidden="true">{{ comment.name|default:'Г'|first|upper }}</div>
+                <div class="comment-avatar" aria-hidden="true">{{ comment.name|default:'M'|first|upper }}</div>
                 <div class="comment-card-body">
-                    <h4>{{ comment.name|default:'Гость' }}{% if comment.table %}<small> · стол {{ comment.table }}</small>{% endif %}</h4>
+                    <h4>{{ comment.name|default:'Mehmon' }}{% if comment.table %}<small> · stol {{ comment.table }}</small>{% endif %}</h4>
                     <p>{{ comment.text }}</p>
                     <time>{{ comment.date_time|date:'d.m.Y · H:i' }}</time>
                 </div>
             </article>
         {% empty %}
-            <p id="comments-empty" class="comments-empty">Пока нет комментариев. Оставьте первый ✨</p>
+            <p id="comments-empty" class="comments-empty">Hozircha izohlar yo‘q. Birinchi bo‘lib izoh qoldiring ✨</p>
         {% endfor %}
     </div>
 </section>

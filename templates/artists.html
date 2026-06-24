@@ -23,7 +23,7 @@
 				        		{% if wedding_pk.first_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding_pk.first_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">Кухня на сегодня</span>
+                                    <span class="link-title" style="font-family: Athelas">Bugungi taomlar</span>
                                 {% endif %}
 {#				        		<span class="link-subtitle">Блюда</span>#}
 				        	</a>
@@ -33,7 +33,7 @@
 
 				    </nav>
                     <div class="hd-logo">
-                        <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Озода и Зармина — главная"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Озода и Зармина" alt="Монограмма ОЗ"></a>
+                        <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
 {#				      <a href="{% url 'home' pk=wedding_pk.pk %}"><img src="{% static 'img/logo_3.png' %}" class="logo-img" title="" alt=""></a>#}
 				    </div>
                     <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
@@ -43,7 +43,7 @@
 				        		{% if wedding_pk.second_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding_pk.second_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">Артисты и Ведущие</span>
+                                    <span class="link-title" style="font-family: Athelas">San’atkorlar va boshlovchilar</span>
                                 {% endif %}
 {#				        		<span class="link-subtitle">Блюда</span>#}
 				        	</a>
@@ -68,7 +68,7 @@
 						<!-- Section: About Us -->
 						<div class="section-about-us">
 							<!-- Title 1 -->
-							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Организатор</h1>
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Tashkilotchi</h1>
 							<!-- /Title 1 -->
 							<div class="row">
 								<!-- Groom -->
@@ -94,7 +94,7 @@
                                                 style="font-family: Athelas">{{ organizer.name }}</h2>
                                         {% endif %}
                                     {% if organizer.entry_time %}
-                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ organizer.entry_time }}</h3>
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Chiqish vaqti: {{ organizer.entry_time }}</h3>
                                     {% endif %}
 {#										<h3 class="about-item-subtitle">{{ leading.get_type_is_display }}</h3>#}
 										<div class="about-item-content">
@@ -128,7 +128,7 @@
 						<!-- Section: About Us -->
 						<div class="section-about-us">
 							<!-- Title 1 -->
-							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Ведущие</h1>
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Boshlovchilar</h1>
 							<!-- /Title 1 -->
 							<div class="row">
 								<!-- Groom -->
@@ -154,7 +154,7 @@
                                                 style="font-family: Athelas">{{ leading.name }}</h2>
                                         {% endif %}
                                     {% if leading.entry_time %}
-                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ artist.entry_time }}</h3>
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Chiqish vaqti: {{ artist.entry_time }}</h3>
                                     {% endif %}
 {#										<h3 class="about-item-subtitle">{{ leading.get_type_is_display }}</h3>#}
 										<div class="about-item-content">
@@ -188,7 +188,7 @@
 						<!-- Section: About Us -->
 						<div class="section-about-us">
 							<!-- Title 1 -->
-							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Артисты и группы</h1>
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">San’atkorlar va guruhlar</h1>
 							<!-- /Title 1 -->
 							<div class="row">
 								<!-- Groom -->
@@ -214,7 +214,7 @@
                                                 style="font-family: Athelas">{{ artist.name }}</h2>
                                         {% endif %}
                                     {% if artist.entry_time %}
-                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ artist.entry_time }}</h3>
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Chiqish vaqti: {{ artist.entry_time }}</h3>
                                     {% endif %}
 {#										<h3 class="about-item-subtitle">{{ artist.get_type_is_display }}</h3>#}
 										<div class="about-item-content">
@@ -248,7 +248,7 @@
 						<div class="section-about-us">
 							<!-- Title 1 -->
 
-							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas; ">Танцевальная группа</h1>
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas; ">Raqs guruhi</h1>
 							<!-- /Title 1 -->
 							<div class="row">
 								<!-- Groom -->
@@ -274,7 +274,7 @@
                                                 style="font-family: Athelas">{{ dance_group.name }}</h2>
                                         {% endif %}
                                     {% if artist.entry_time %}
-                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ artist.entry_time }}</h3>
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Chiqish vaqti: {{ artist.entry_time }}</h3>
                                     {% endif %}
 {#										<h3 class="about-item-subtitle">{{ dance_group.get_type_is_display }}</h3>#}
 										<div class="about-item-content">
@@ -301,7 +301,7 @@
 {% endif %}
 
 {% if current_datetime > wedding_date and current_datetime < end_date %}
-    <h4 class="blog-comments-title" style="text-align: center">Оставьте комментарие (Доступно еще {{ hours }}ч и {{ minutes }}мин):</h4>
+    <h4 class="blog-comments-title" style="text-align: center">Izoh qoldiring (yana {{ hours }} soat {{ minutes }} daqiqa mavjud):</h4>
     <!-- Comments Form -->
     <div class="well comment-form-card">
         <form role="form" id="wedding-comment-form" class="comment-form" method="post" action="{% url 'singers' pk=wedding_pk.pk %}">
@@ -310,35 +310,35 @@
                 <div class="col-md-6">
                     <!-- item -->
                     <div class="form-group">
-                        <label for="email">Ваше имя:</label>
-                        <input id="name-comment" type="text" name="name" class="form-control" placeholder="Имя(Необязательно)"/>
+                        <label for="email">Ismingiz:</label>
+                        <input id="name-comment" type="text" name="name" class="form-control" placeholder="Ism (majburiy emas)"/>
                     </div>
                     <!-- /item -->
                 </div>
                 <div class="col-md-6">
                     <!-- item -->
                     <div class="form-group">
-                        <label for="guests">Ваш стол:</label>
+                        <label for="guests">Stolingiz:</label>
                         <input type="number" class="form-control" name="table" id="guests"
-                               placeholder="Ваш стол (Необязательно)">
+                               placeholder="Stol raqami (majburiy emas)">
                     </div>
                     <!-- /item -->
                 </div>
             </div>
             <div class="form-group">
-                <label>Текст</label>
+                <label>Matn</label>
                 <textarea id="text-comment" class="form-control" name="text" rows="3" required></textarea>
             </div>
             <button type="submit" class="btn btn-1c" onmouseover="this.style.backgroundColor='#5A4240'"
-                    onmouseout="this.style.backgroundColor='transparent'">Отправить
+                    onmouseout="this.style.backgroundColor='transparent'">Yuborish
             </button>
         </form>
     </div>
     {% elif current_datetime > end_date %}
-    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">К сожалению, уже невозможно
-        оставить комментарий! Окно для комментариев было открыто всего на 24 часа с момента начала свадьбы.</h4>
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Afsuski, endi izoh qoldirib bo‘lmaydi!
+        Izohlar oynasi to‘y boshlanganidan keyin faqat 24 soat davomida ochiq edi.</h4>
     {% elif wedding_date > current_datetime %}
-    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Свадьба еще не началась!</h4>
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">To‘y hali boshlanmadi!</h4>
 {% endif %}
     {% include '_comment_list.html' %}
         <br>
@@ -429,12 +429,12 @@
                         var inputName = document.getElementById('name-comment').value;
                         let guest_number;
                         if (inputName === '') {
-                            inputName = 'Неизвестно'
+                            inputName = 'Noma’lum'
                         }
                         if (inputElement === '') {
                             guest_number = ''
                         } else {
-                            guest_number = ` | ${inputElement} стол`
+                            guest_number = ` | ${inputElement}-stol`
                         }
                         var currentDate = new Date();
                         var day = currentDate.getDate();
@@ -453,7 +453,7 @@
                 </a>
                 <div class="media-body">
                         <h4 class="media-heading">${inputName}
-                        <small>${day} ${month} ${year} г. ${hours}:${formattedMinutes}
+                        <small>${day} ${month} ${year}-y. ${hours}:${formattedMinutes}
                                               ${guest_number}
                          </small>
                     </h4>
@@ -467,14 +467,14 @@
                 </a>
                 <div class="media-body">
                         <h4 class="media-heading">${inputName}
-                        <small>${day} ${month} ${year} г. ${hours}:${formattedMinutes}
+                        <small>${day} ${month} ${year}-y. ${hours}:${formattedMinutes}
                                               ${guest_number}
                          </small>
                     </h4>
                     ${inputText}
                 </div>`;
                             nocomments.insertBefore(newComment, nocomments.firstChild);
-                            document.getElementById('no-comments-text').innerText = 'Комментарии'
+                            document.getElementById('no-comments-text').innerText = 'Izohlar'
                         }
                         document.getElementById('guests').value = '';
                         document.getElementById('text-comment').value = '';
@@ -483,7 +483,7 @@
                         if (oldMessage) oldMessage.remove();
                         var successMessage = document.createElement('p');
                         successMessage.className = 'comment-success-message';
-                        successMessage.textContent = 'Спасибо! Комментарий сохранён ♡';
+                        successMessage.textContent = 'Rahmat! Izoh saqlandi ♡';
                         form.appendChild(successMessage);
                         window.setTimeout(function () { successMessage.remove(); }, 4000);
 

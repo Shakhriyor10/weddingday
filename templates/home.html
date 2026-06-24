@@ -21,7 +21,7 @@
                                 {% if wedding.first_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding.first_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">Кухня на сегодня</span>
+                                    <span class="link-title" style="font-family: Athelas">Bugungi taomlar</span>
                                 {% endif %}
 {#				        		<span class="link-subtitle">Блюда</span>#}
 				        	</a>
@@ -31,7 +31,7 @@
 
 				    </nav>
                     <div class="hd-logo">
-                        <a href="{% url 'home' wedding.pk %}" aria-label="Озода и Зармина — главная"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Озода и Зармина" alt="Монограмма ОЗ"></a>
+                        <a href="{% url 'home' wedding.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
 				    </div>
                     <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
 				      <ul class="nav navbar-nav hd-list-menu clearfix">
@@ -40,7 +40,7 @@
                                 {% if wedding.second_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding.second_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">Артисты и Ведущие</span>
+                                    <span class="link-title" style="font-family: Athelas">San’atkorlar va boshlovchilar</span>
                                 {% endif %}
 {#				        		<span class="link-subtitle">Блюда</span>#}
 				        	</a>
@@ -141,13 +141,13 @@
 {#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">День свадьбы</p>#}
 {#                    {% endif %}#}
                     {% if wedding.wedding_type == 'wedding' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">День свадьбы</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">To‘y kuni</p>
                         {% elif wedding.wedding_type == 'wedding_young' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Суннат туй</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Sunnat to‘yi</p>
                         {% elif wedding.wedding_type == 'fotha_tuy' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Фотиха Туй</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Fotiha to‘yi</p>
                         {% elif wedding.wedding_type == 'sunnat_tuy_and_musargiron' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Суннат ту'й и Му'сар гирон</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Sunnat to‘yi va Mu’sar giron</p>
                     {% endif %}
 						<h2 class="countdown-title countdown-title1"><span class="countdown-title-borders" style="font-family: Athelas">{{ wedding.date|date:'d/m/Y' }} | {{ wedding.date|date:'H:i' }}</span></h2>
 						<!-- /countdown title top -->
@@ -173,46 +173,46 @@
 
             <section class="wishes-panel" aria-labelledby="wishes-title">
                 <div class="wishes-heading">
-                    <span class="wishes-kicker">Книга пожеланий</span>
-                    <h2 id="wishes-title">Оставьте тёплые слова</h2>
-                    <p>Ваше пожелание сохранится именно для свадьбы {{ wedding.groom_name }}{% if wedding.bride_name %} и {{ wedding.bride_name }}{% endif %}.</p>
+                    <span class="wishes-kicker">Tilaklar kitobi</span>
+                    <h2 id="wishes-title">Iliq tilaklaringizni qoldiring</h2>
+                    <p>Tilagingiz aynan {{ wedding.groom_name }}{% if wedding.bride_name %} va {{ wedding.bride_name }}{% endif %} to‘yi uchun saqlanadi.</p>
                 </div>
 
                 {% if current_datetime > wedding_date and current_datetime < end_date %}
                     <form id="home-comment-form" class="wishes-form" method="post" action="{% url 'home' wedding.pk %}">
                         {% csrf_token %}
                         <div class="wishes-form-row">
-                            <label>Ваше имя
-                                <input type="text" name="name" maxlength="255" placeholder="Можно оставить пустым">
+                            <label>Ismingiz
+                                <input type="text" name="name" maxlength="255" placeholder="Bo‘sh qoldirish mumkin">
                             </label>
-                            <label>Номер стола
-                                <input type="number" name="table" min="1" placeholder="Необязательно">
+                            <label>Stol raqami
+                                <input type="number" name="table" min="1" placeholder="Majburiy emas">
                             </label>
                         </div>
-                        <label>Пожелание
-                            <textarea name="text" rows="4" maxlength="2000" required placeholder="Напишите несколько добрых слов молодожёнам…"></textarea>
+                        <label>Tilak
+                            <textarea name="text" rows="4" maxlength="2000" required placeholder="Yangi turmush qurganlarga bir nechta ezgu so‘z yozing…"></textarea>
                         </label>
-                        <button type="submit" class="wishes-button">Отправить с любовью <span aria-hidden="true">♡</span></button>
+                        <button type="submit" class="wishes-button">Mehr bilan yuborish <span aria-hidden="true">♡</span></button>
                         <p id="home-comment-status" class="wishes-status" role="status" aria-live="polite"></p>
                     </form>
                 {% elif current_datetime <= wedding_date %}
-                    <p class="wishes-notice">Книга пожеланий откроется в день свадьбы.</p>
+                    <p class="wishes-notice">Tilaklar kitobi to‘y kuni ochiladi.</p>
                 {% else %}
-                    <p class="wishes-notice">Книга пожеланий закрыта, но тёплые воспоминания остаются навсегда.</p>
+                    <p class="wishes-notice">Tilaklar kitobi yopilgan, ammo iliq xotiralar abadiy qoladi.</p>
                 {% endif %}
 
                 <div id="home-comments" class="wishes-list">
                     {% for comment in comments %}
                         <article class="wish-card">
-                            <div class="wish-avatar" aria-hidden="true">{{ comment.name|default:'Г'|first|upper }}</div>
+                            <div class="wish-avatar" aria-hidden="true">{{ comment.name|default:'M'|first|upper }}</div>
                             <div>
-                                <h3>{{ comment.name|default:'Гость' }}{% if comment.table %}<small> · стол {{ comment.table }}</small>{% endif %}</h3>
+                                <h3>{{ comment.name|default:'Mehmon' }}{% if comment.table %}<small> · stol {{ comment.table }}</small>{% endif %}</h3>
                                 <p>{{ comment.text }}</p>
                                 <time>{{ comment.date_time|date:'d.m.Y · H:i' }}</time>
                             </div>
                         </article>
                     {% empty %}
-                        <p id="home-no-comments" class="wishes-empty">Будьте первым, кто оставит пожелание ✨</p>
+                        <p id="home-no-comments" class="wishes-empty">Birinchi bo‘lib tilak qoldiring ✨</p>
                     {% endfor %}
                 </div>
             </section>
@@ -290,14 +290,14 @@
         const avatar = document.createElement('div');
         avatar.className = 'wish-avatar';
         avatar.setAttribute('aria-hidden', 'true');
-        avatar.textContent = (comment.name || 'Г').trim().charAt(0).toUpperCase() || 'Г';
+        avatar.textContent = (comment.name || 'M').trim().charAt(0).toUpperCase() || 'M';
 
         const content = document.createElement('div');
         const heading = document.createElement('h3');
-        heading.textContent = comment.name || 'Гость';
+        heading.textContent = comment.name || 'Mehmon';
         if (comment.table) {
             const table = document.createElement('small');
-            table.textContent = ' · стол ' + comment.table;
+            table.textContent = ' · stol ' + comment.table;
             heading.appendChild(table);
         }
 
@@ -318,7 +318,7 @@
         event.preventDefault();
         const button = form.querySelector('button[type="submit"]');
         button.disabled = true;
-        status.textContent = 'Сохраняем пожелание…';
+        status.textContent = 'Tilak saqlanmoqda…';
 
         try {
             const response = await fetch(form.action, {
@@ -327,9 +327,9 @@
                 headers: {'X-Requested-With': 'XMLHttpRequest'}
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.message || 'Не удалось отправить пожелание');
+            if (!response.ok) throw new Error(data.message || 'Tilakni yuborib bo‘lmadi');
 
-            status.textContent = 'Спасибо! Ваше пожелание сохранено ♡';
+            status.textContent = 'Rahmat! Tilagingiz saqlandi ♡';
             form.reset();
             const emptyState = document.getElementById('home-no-comments');
             if (emptyState) emptyState.remove();

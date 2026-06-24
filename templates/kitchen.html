@@ -83,7 +83,7 @@
 				        		{% if wedding_pk.first_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding_pk.first_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">Кухня на сегодня</span>
+                                    <span class="link-title" style="font-family: Athelas">Bugungi taomlar</span>
                                 {% endif %}
 {#				        		<span class="link-subtitle">Блюда</span>#}
 				        	</a>
@@ -93,7 +93,7 @@
 
 				    </nav>
                     <div class="hd-logo">
-                        <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Озода и Зармина — главная"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Озода и Зармина" alt="Монограмма ОЗ"></a>
+                        <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
 {#				      <a href="{% url 'home' pk=wedding_pk.pk %}"><img src="{% static 'img/logo_3.png' %}" class="logo-img" title="" alt=""></a>#}
 				    </div>
                     <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
@@ -103,7 +103,7 @@
 				        		{% if wedding_pk.second_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding_pk.second_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">Артисты и Ведущие</span>
+                                    <span class="link-title" style="font-family: Athelas">San’atkorlar va boshlovchilar</span>
                                 {% endif %}
 {#				        		<span class="link-subtitle">Блюда</span>#}
 				        	</a>
@@ -126,7 +126,7 @@
 
 					<div class="col-xs-10 col-xs-offset-1">
 						<!-- Page title -->
-						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Горячие закуски</h2>
+						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Issiq gazaklar</h2>
 						<!-- /page title -->
 						<!-- SECTION: Blog + Side Column -->
 						<div class="section-blog">
@@ -154,7 +154,7 @@
 													<div class="post-text">
 														<p style="font-family: Athelas">{{ dish_hot.description }}</p>
 													</div>
-													<p class="btn btn-1c" style="font-family: Athelas">Время подачи: {{ dish_hot.time }}</p>
+											<p class="btn btn-1c" style="font-family: Athelas">Tortish vaqti: {{ dish_hot.time }}</p>
 												</div>
 												<!-- /Post content -->
 											</div>
@@ -202,7 +202,7 @@
                 {% if dishes %}
 
                 <div class="col-xs-10 col-xs-offset-1">
-						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Первое блюдо</h2>
+						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Birinchi taom</h2>
 						<div class="section-blog">
 							<div class="row">
 								<div class="col-md-12">
@@ -220,7 +220,7 @@
 													<div class="post-text">
 														<p style="font-family: Athelas">{{ dish.description }}</p>
 													</div>
-													<p class="btn btn-1c" style="font-family: Athelas">Время подачи: {{ dish.time }}</p>
+											<p class="btn btn-1c" style="font-family: Athelas">Tortish vaqti: {{ dish.time }}</p>
 												</div>
 											</div>
 										</div>
@@ -235,7 +235,7 @@
                 {% if second_dishes %}
 
                 <div class="col-xs-10 col-xs-offset-1">
-						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Второе блюдо</h2>
+						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Ikkinchi taom</h2>
 						<div class="section-blog">
 							<div class="row">
 								<div class="col-md-12">
@@ -253,7 +253,7 @@
 													<div class="post-text">
 														<p style="font-family: Athelas">{{ dish.description }}</p>
 													</div>
-													<p class="btn btn-1c" style="font-family: Athelas">Время подачи: {{ dish.time }}</p>
+											<p class="btn btn-1c" style="font-family: Athelas">Tortish vaqti: {{ dish.time }}</p>
 												</div>
 											</div>
 										</div>
@@ -268,7 +268,7 @@
                 {% if desert %}
 
                 <div class="col-xs-10 col-xs-offset-1">
-						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Десерты</h2>
+						<h2 class="title1 couple-title1 title1-border" style="font-family: Athelas">Shirinliklar</h2>
 						<div class="section-blog">
 							<div class="row">
 								<!-- blog -->
@@ -294,7 +294,7 @@
 													<div class="post-text">
 														<p style="font-family: Athelas">{{ desert.description }}</p>
 													</div>
-													<p class="btn btn-1c" style="font-family: Athelas">Время подачи: {{ desert.time }}</p>
+											<p class="btn btn-1c" style="font-family: Athelas">Tortish vaqti: {{ desert.time }}</p>
 												</div>
 												<!-- /Post content -->
 											</div>
@@ -312,7 +312,7 @@
 			</div>
             {% endif %}
 {% if current_datetime > wedding_date and current_datetime < end_date %}
-    <h4 class="blog-comments-title" style="text-align: center">Оставьте комментарие (Доступно еще {{ hours }}ч и {{ minutes }}мин):</h4>
+    <h4 class="blog-comments-title" style="text-align: center">Izoh qoldiring (yana {{ hours }} soat {{ minutes }} daqiqa mavjud):</h4>
     <!-- Comments Form -->
     <div class="well comment-form-card">
         <form id="wedding-comment-form" class="comment-form" method="post" action="{% url 'hot_appetizers' pk=wedding_pk.pk %}" role="form">
@@ -321,35 +321,35 @@
                 <div class="col-md-6">
                     <!-- item -->
                     <div class="form-group">
-                        <label for="email">Ваше имя:</label>
-                        <input id="name-comment2" type="text" name="name" class="form-control" placeholder="Имя(Необязательно)"/>
+                        <label for="email">Ismingiz:</label>
+                        <input id="name-comment2" type="text" name="name" class="form-control" placeholder="Ism (majburiy emas)"/>
                     </div>
                     <!-- /item -->
                 </div>
                 <div class="col-md-6">
                     <!-- item -->
                     <div class="form-group">
-                        <label for="guests">Ваш стол:</label>
+                        <label for="guests">Stolingiz:</label>
                         <input type="number" class="form-control" name="table" id="guests2"
-                               placeholder="Ваш стол (Необязательно)">
+                               placeholder="Stol raqami (majburiy emas)">
                     </div>
                     <!-- /item -->
                 </div>
             </div>
             <div class="form-group">
-                <label>Текст</label>
+                <label>Matn</label>
                 <textarea id="text-comment2" class="form-control" name="text" rows="3" required></textarea>
             </div>
             <button type="submit" class="btn btn-1c" onmouseover="this.style.backgroundColor='#5A4240'"
-                    onmouseout="this.style.backgroundColor='transparent'">Отправить
+                    onmouseout="this.style.backgroundColor='transparent'">Yuborish
             </button>
         </form>
     </div>
     {% elif current_datetime > end_date %}
-    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">К сожалению, уже невозможно
-        оставить комментарий! Окно для комментариев было открыто всего на 24 часа с момента начала свадьбы.</h4>
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Afsuski, endi izoh qoldirib bo‘lmaydi!
+        Izohlar oynasi to‘y boshlanganidan keyin faqat 24 soat davomida ochiq edi.</h4>
     {% elif wedding_date > current_datetime %}
-    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Свадьба еще не началась!</h4>
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">To‘y hali boshlanmadi!</h4>
 {% endif %}
     {% include '_comment_list.html' %}
         <br>
@@ -440,12 +440,12 @@
                         var inputName = document.getElementById('name-comment2').value;
                         let guest_number;
                         if (inputName === '') {
-                            inputName = 'Неизвестно'
+                            inputName = 'Noma’lum'
                         }
                         if (inputElement === '') {
                             guest_number = ''
                         } else {
-                            guest_number = ` | ${inputElement} стол`
+                            guest_number = ` | ${inputElement}-stol`
                         }
                         var currentDate = new Date();
                         var day = currentDate.getDate();
@@ -464,7 +464,7 @@
                 </a>
                 <div class="media-body">
                         <h4 class="media-heading">${inputName}
-                        <small>${day} ${month} ${year} г. ${hours}:${formattedMinutes}
+                        <small>${day} ${month} ${year}-y. ${hours}:${formattedMinutes}
                                               ${guest_number}
                          </small>
                     </h4>
@@ -478,14 +478,14 @@
                 </a>
                 <div class="media-body">
                         <h4 class="media-heading">${inputName}
-                        <small>${day} ${month} ${year} г. ${hours}:${formattedMinutes}
+                        <small>${day} ${month} ${year}-y. ${hours}:${formattedMinutes}
                                               ${guest_number}
                          </small>
                     </h4>
                     ${inputText}
                 </div>`;
                             nocomments.insertBefore(newComment, nocomments.firstChild);
-                            document.getElementById('no-comments-text2').innerText = 'Комментарии'
+                            document.getElementById('no-comments-text2').innerText = 'Izohlar'
                         }
                         document.getElementById('guests2').value = '';
                         document.getElementById('text-comment2').value = '';
@@ -494,7 +494,7 @@
                         if (oldMessage) oldMessage.remove();
                         var successMessage = document.createElement('p');
                         successMessage.className = 'comment-success-message';
-                        successMessage.textContent = 'Спасибо! Комментарий сохранён ♡';
+                        successMessage.textContent = 'Rahmat! Izoh saqlandi ♡';
                         form.appendChild(successMessage);
                         window.setTimeout(function () { successMessage.remove(); }, 4000);
                     } else {
