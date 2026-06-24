@@ -57,16 +57,14 @@
 	<!-- background-slideshow -->
 	<div class="bg-slideshow">
 		<!-- slideshow-item -->
-		<div class="page-background viewport" id="slideshowBackground" style="background-image: url('{% static 'img/mob-backg.jpg' %}')"></div>
+		<div class="page-background viewport" id="slideshowBackground">
+            <img id="backgroundSlideA" class="background-slide is-active" src="{% static 'img/mob-backg.jpg' %}" alt="" aria-hidden="true">
+            <img id="backgroundSlideB" class="background-slide" alt="" aria-hidden="true">
+        </div>
 		<!-- /slideshow-item -->
 	</div>
 	<!--/Background-slideshow -->
 </div>
-<style>
-    .bg-slideshow .page-background {
-        transition: background-image 0.5s ease-in-out;
-    }
-</style>
 <!-- Background-container -->
 <!-- === /PAGE BACKGROUND === -->
 
@@ -145,14 +143,17 @@
     {#    "{% static 'img/mob-davlat4.jpg' %}"#}
     {#];#}
 
-        var mobileImages = [
+    var mobileUserImages = [
         {% if wedding_photo %}
         {% for photo in wedding_photo %}
             "{{ photo.mob_photo.url|escapejs }}",
         {% endfor %}
         {% endif %}
-            "{% static 'img/wedding-hero-mobile.webp' %}",
-            "{% static 'img/mob-backg.jpg' %}"
+    ];
+
+    var mobileFallbackImages = [
+        "{% static 'img/wedding-hero-mobile.webp' %}",
+        "{% static 'img/mob-backg.jpg' %}"
     ];
 
     var desktopImages = [
@@ -163,52 +164,93 @@
 
     // Установка фотографий в слайдшоу
     var slideshowItem = document.querySelector('.bg-slideshow .page-background');
+    var slideLayers = [
+        document.getElementById('backgroundSlideA'),
+        document.getElementById('backgroundSlideB')
+    ];
+    var activeLayerIndex = 0;
     var currentIndex = 0;
-    var images;
     var availableImages = [];
 
-    if (isMobileDevice()) {
-        images = mobileImages;
-    } else {
-        images = desktopImages;
-    }
-
-    // Предварительная загрузка изображений
-    function showNextBackground() {
+    function showNextBackground(immediate) {
         if (!availableImages.length) return;
-        slideshowItem.style.backgroundImage = "url('" + availableImages[currentIndex] + "')";
+        var url = availableImages[currentIndex];
+
+        if (immediate) {
+            slideLayers[activeLayerIndex].src = url;
+        } else {
+            var nextLayerIndex = activeLayerIndex === 0 ? 1 : 0;
+            var nextLayer = slideLayers[nextLayerIndex];
+            var activeLayer = slideLayers[activeLayerIndex];
+
+            nextLayer.src = url;
+            window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(function () {
+                    nextLayer.classList.add('is-active');
+                    activeLayer.classList.remove('is-active');
+                    activeLayerIndex = nextLayerIndex;
+                });
+            });
+        }
+
         currentIndex = (currentIndex + 1) % availableImages.length;
     }
 
     function startSlideshow() {
         if (!availableImages.length) return;
         currentIndex = 0;
-        showNextBackground();
+        showNextBackground(true);
         if (availableImages.length > 1) {
-            window.setInterval(showNextBackground, 5000);
+            window.setInterval(function () {
+                showNextBackground(false);
+            }, 5000);
         }
     }
 
-    function preloadUsableImages() {
-        var remaining = images.length;
-        if (!remaining) return;
+    function preloadUsableImages(imageList, done) {
+        var remaining = imageList.length;
+        var loadedByIndex = new Array(imageList.length);
 
-        images.forEach(function (url) {
+        if (!remaining) {
+            done([]);
+            return;
+        }
+
+        imageList.forEach(function (url, index) {
             var img = new Image();
             img.onload = function () {
-                availableImages.push(url);
+                loadedByIndex[index] = url;
                 remaining -= 1;
-                if (remaining === 0) startSlideshow();
+                if (remaining === 0) done(loadedByIndex.filter(Boolean));
             };
             img.onerror = function () {
                 remaining -= 1;
-                if (remaining === 0) startSlideshow();
+                if (remaining === 0) done(loadedByIndex.filter(Boolean));
             };
             img.src = url;
         });
     }
 
-    preloadUsableImages();
+    function useImagesOrFallback(primaryImages, fallbackImages) {
+        preloadUsableImages(primaryImages, function (loadedPrimaryImages) {
+            if (loadedPrimaryImages.length) {
+                availableImages = loadedPrimaryImages;
+                startSlideshow();
+                return;
+            }
+
+            preloadUsableImages(fallbackImages, function (loadedFallbackImages) {
+                availableImages = loadedFallbackImages;
+                startSlideshow();
+            });
+        });
+    }
+
+    if (isMobileDevice()) {
+        useImagesOrFallback(mobileUserImages, mobileFallbackImages);
+    } else {
+        useImagesOrFallback(desktopImages, ["{% static 'img/backg.jpg' %}"]);
+    }
 </script>
 <script>
 (function () {
