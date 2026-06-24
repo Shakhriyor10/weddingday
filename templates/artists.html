@@ -1,0 +1,529 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="boxed-content">
+
+
+
+			<!-- Header -->
+			<header id="header" class="navbar navbar-default navbar-static-top" >
+				<div class="clearfix" style="display: flex; justify-content: center">
+				    <!-- logo -->
+
+				    <!-- /logo -->
+				    <!-- responsive menu -->
+				    <!-- /responsive menu -->
+				    <!-- menu -->
+				    <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
+				      <ul class="nav navbar-nav hd-list-menu clearfix">
+				        <li>
+				        	<a href="{% url 'hot_appetizers' pk=wedding_pk.pk %}">
+				        		{% if wedding_pk.first_folder %}
+                                    <span class="link-title" style="font-family: Athelas">{{ wedding_pk.first_folder }}</span>
+                                    {% else %}
+                                    <span class="link-title" style="font-family: Athelas">Кухня на сегодня</span>
+                                {% endif %}
+{#				        		<span class="link-subtitle">Блюда</span>#}
+				        	</a>
+				        </li>
+
+				      </ul>
+
+				    </nav>
+                    <div class="hd-logo">
+                        {% if wedding_pk.logo %}
+                            <a href="{% url 'home' pk=wedding_pk.pk %}"><img src="{{ wedding_pk.logo.url }}" class="logo-img" title="" alt=""></a>
+                            {% else %}
+                            <a href="{% url 'home' pk=wedding_pk.pk %}"><img src="{% static 'img/logo_3.png' %}" class="logo-img" title="" alt=""></a>
+                        {% endif %}
+{#				      <a href="{% url 'home' pk=wedding_pk.pk %}"><img src="{% static 'img/logo_3.png' %}" class="logo-img" title="" alt=""></a>#}
+				    </div>
+                    <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
+				      <ul class="nav navbar-nav hd-list-menu clearfix">
+				        <li>
+				        	<a href="{% url 'singers' pk=wedding_pk.pk %}">
+				        		{% if wedding_pk.second_folder %}
+                                    <span class="link-title" style="font-family: Athelas">{{ wedding_pk.second_folder }}</span>
+                                    {% else %}
+                                    <span class="link-title" style="font-family: Athelas">Артисты и Ведущие</span>
+                                {% endif %}
+{#				        		<span class="link-subtitle">Блюда</span>#}
+				        	</a>
+				        </li>
+
+				      </ul>
+
+				    </nav>
+
+
+				    <!-- /menu -->
+				</div>
+			</header>
+			<!-- /header -->
+			<!-- content -->
+{% if organizer %}
+
+
+			<div class="page-content clearfix">
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1">
+						<!-- Section: About Us -->
+						<div class="section-about-us">
+							<!-- Title 1 -->
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Организатор</h1>
+							<!-- /Title 1 -->
+							<div class="row">
+								<!-- Groom -->
+                                {% for organizer in organizer %}
+
+
+
+								<div class="col-sm-6">
+									<div class="about-item">
+										<div class="about-item-picture">
+                                            {% if organizer.link %}
+                                            <a href="{{ organizer.link }}"><img src="{{ organizer.photo.url }}" alt="" style="max-height: 300px"></a>
+                                                {% else %}
+                                                <img src="{{ organizer.photo.url }}" alt="" style="max-height: 300px">
+                                            {% endif %}
+										</div>
+										{% if organizer.link %}
+
+                                            <h2 class="about-item-title" style="font-family: Athelas"><a
+                                                    href="{{ organizer.link }}">{{ organizer.name }}</a></h2>
+                                        {% else %}
+                                            <h2 class="about-item-title"
+                                                style="font-family: Athelas">{{ organizer.name }}</h2>
+                                        {% endif %}
+                                    {% if organizer.entry_time %}
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ organizer.entry_time }}</h3>
+                                    {% endif %}
+{#										<h3 class="about-item-subtitle">{{ leading.get_type_is_display }}</h3>#}
+										<div class="about-item-content">
+											<p style="font-family: Athelas">{{ organizer.description }}</p>
+										</div>
+									</div>
+								</div>
+                                {% endfor %}
+								<!-- /Groom -->
+
+								<!-- Bride -->
+								<!-- /Bride -->
+							</div>
+
+
+						</div>
+
+						<!-- /Section: About Us -->
+						<!-- Section: Timeline -->
+						<!-- /Section: Timeline -->
+					</div>
+				</div>
+			</div>
+{% endif %}
+{% if leading %}
+
+
+			<div class="page-content clearfix">
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1">
+						<!-- Section: About Us -->
+						<div class="section-about-us">
+							<!-- Title 1 -->
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Ведущие</h1>
+							<!-- /Title 1 -->
+							<div class="row">
+								<!-- Groom -->
+                                {% for leading in leading %}
+
+
+
+								<div class="col-sm-6">
+									<div class="about-item">
+										<div class="about-item-picture">
+                                            {% if leading.link %}
+                                            <a href="{{ leading.link }}"><img src="{{ leading.photo.url }}" alt="" style="max-height: 300px"></a>
+                                                {% else %}
+                                                <img src="{{ leading.photo.url }}" alt="" style="max-height: 300px">
+                                            {% endif %}
+										</div>
+										{% if leading.link %}
+
+                                            <h2 class="about-item-title" style="font-family: Athelas"><a
+                                                    href="{{ leading.link }}">{{ leading.name }}</a></h2>
+                                        {% else %}
+                                            <h2 class="about-item-title"
+                                                style="font-family: Athelas">{{ leading.name }}</h2>
+                                        {% endif %}
+                                    {% if leading.entry_time %}
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ artist.entry_time }}</h3>
+                                    {% endif %}
+{#										<h3 class="about-item-subtitle">{{ leading.get_type_is_display }}</h3>#}
+										<div class="about-item-content">
+											<p style="font-family: Athelas">{{ leading.description }}</p>
+										</div>
+									</div>
+								</div>
+                                {% endfor %}
+								<!-- /Groom -->
+
+								<!-- Bride -->
+								<!-- /Bride -->
+							</div>
+
+
+						</div>
+
+						<!-- /Section: About Us -->
+						<!-- Section: Timeline -->
+						<!-- /Section: Timeline -->
+					</div>
+				</div>
+			</div>
+{% endif %}
+{% if artists %}
+
+
+<div class="page-content clearfix" >
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1">
+						<!-- Section: About Us -->
+						<div class="section-about-us">
+							<!-- Title 1 -->
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">Артисты и группы</h1>
+							<!-- /Title 1 -->
+							<div class="row">
+								<!-- Groom -->
+                                {% for artist in artists %}
+
+
+
+								<div class="col-sm-6">
+									<div class="about-item">
+										<div class="about-item-picture">
+                                            {% if artist.link %}
+                                                <a href="{{ artist.link }}"><img src="{{ artist.photo.url }}" alt="" style="max-height: 300px"></a>
+                                                {% else %}
+                                                <img src="{{ artist.photo.url }}" alt="" style="max-height: 300px">
+                                            {% endif %}
+										</div>
+                                        {% if artist.link %}
+
+                                            <h2 class="about-item-title" style="font-family: Athelas"><a
+                                                    href="{{ artist.link }}">{{ artist.name }}</a></h2>
+                                        {% else %}
+                                            <h2 class="about-item-title"
+                                                style="font-family: Athelas">{{ artist.name }}</h2>
+                                        {% endif %}
+                                    {% if artist.entry_time %}
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ artist.entry_time }}</h3>
+                                    {% endif %}
+{#										<h3 class="about-item-subtitle">{{ artist.get_type_is_display }}</h3>#}
+										<div class="about-item-content">
+											<p style="font-family: Athelas">{{ artist.description }}</p>
+										</div>
+									</div>
+								</div>
+                                {% endfor %}
+								<!-- /Groom -->
+
+								<!-- Bride -->
+								<!-- /Bride -->
+							</div>
+
+
+						</div>
+
+						<!-- /Section: About Us -->
+						<!-- Section: Timeline -->
+						<!-- /Section: Timeline -->
+					</div>
+				</div>
+			</div>
+{% endif %}
+{% if dance_group %}
+
+<div class="page-content clearfix">
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1">
+						<!-- Section: About Us -->
+						<div class="section-about-us">
+							<!-- Title 1 -->
+
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas; ">Танцевальная группа</h1>
+							<!-- /Title 1 -->
+							<div class="row">
+								<!-- Groom -->
+                                {% for dance_group in dance_group %}
+
+
+
+								<div class="col-sm-6">
+									<div class="about-item">
+										<div class="about-item-picture">
+											{% if artist.link %}
+                                                <a href="{{ dance_group.link }}"><img src="{{ dance_group.photo.url }}" alt="" style="max-height: 300px"></a>
+                                                {% else %}
+                                                <img src="{{ dance_group.photo.url }}" alt="" style="max-height: 300px">
+                                            {% endif %}
+										</div>
+										{% if dance_group.link %}
+
+                                            <h2 class="about-item-title" style="font-family: Athelas"><a
+                                                    href="{{ dance_group.link }}">{{ dance_group.name }}</a></h2>
+                                        {% else %}
+                                            <h2 class="about-item-title"
+                                                style="font-family: Athelas">{{ dance_group.name }}</h2>
+                                        {% endif %}
+                                    {% if artist.entry_time %}
+                                        <h3 class="about-item-subtitle" style="font-family: Athelas">Время вступление: {{ artist.entry_time }}</h3>
+                                    {% endif %}
+{#										<h3 class="about-item-subtitle">{{ dance_group.get_type_is_display }}</h3>#}
+										<div class="about-item-content">
+											<p style="font-family: Athelas">{{ dance_group.description }}</p>
+										</div>
+									</div>
+								</div>
+                                {% endfor %}
+								<!-- /Groom -->
+
+								<!-- Bride -->
+								<!-- /Bride -->
+							</div>
+
+
+						</div>
+
+						<!-- /Section: About Us -->
+						<!-- Section: Timeline -->
+						<!-- /Section: Timeline -->
+					</div>
+				</div>
+			</div>
+{% endif %}
+
+{% if current_datetime > wedding_date and current_datetime < end_date %}
+    <h4 class="blog-comments-title" style="text-align: center">Оставьте комментарие (Доступно еще {{ hours }}ч и {{ minutes }}мин):</h4>
+    <!-- Comments Form -->
+    <div class="well">
+        <form role="form" id="appeal-form">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- item -->
+                    <div class="form-group">
+                        <label for="email">Ваше имя:</label>
+                        <input id="name-comment" type="text" name="name" class="form-control" placeholder="Имя(Необязательно)"/>
+                    </div>
+                    <!-- /item -->
+                </div>
+                <div class="col-md-6">
+                    <!-- item -->
+                    <div class="form-group">
+                        <label for="guests">Ваш стол:</label>
+                        <input type="number" class="form-control" name="table" id="guests"
+                               placeholder="Ваш стол (Необязательно)">
+                    </div>
+                    <!-- /item -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Текст</label>
+                <textarea id="text-comment" class="form-control" name="text" rows="3" required></textarea>
+            </div>
+            <button class="btn btn-1c" onmouseover="this.style.backgroundColor='#5A4240'"
+                    onmouseout="this.style.backgroundColor='transparent'">Отправить
+            </button>
+        </form>
+    </div>
+    {% elif current_datetime > end_date %}
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">К сожалению, уже невозможно
+        оставить комментарий! Окно для комментариев было открыто всего на 24 часа с момента начала свадьбы.</h4>
+    {% elif wedding_date > current_datetime %}
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Свадьба еще не началась!</h4>
+{% endif %}
+    {% if comments %}
+        <h4 class="blog-comments-title" style="text-align: center">Комментарии</h4>
+        {% for comment in comments %}
+            <div id="commet_id" class="media" style="padding-left: 10px">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="{% static 'img/user.png' %}" alt="">
+                </a>
+                <div class="media-body">
+                    {% if comment.name %}
+                        <h4 class="media-heading">{{ comment.name }}
+                        {% else %}
+                        <h4 class="media-heading">Неизвестно
+                    {% endif %}
+                        <small>{{ comment.date_time }}
+                        {% if comment.table %}
+                            | {{ comment.table }} стол
+                        {% endif %} </small>
+                    </h4>
+                    {{ comment.text }}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        <h4 id="no-comments-text" class="blog-comments-title" style="text-align: center">Нет комментарии.</h4>
+        <div id="no-comments" class="media" style="padding-left: 10px"></div>
+    {% endif %}
+        <br>
+        <br>
+			<!-- /content -->
+			<!-- footer -->
+			<footer id="footer">
+				<ul class="socials" style="display: flex; justify-content: center; list-style: none">
+                                <li class="footer-ft">
+                                    {% if wedding_pk.link_facebook %}
+                                        <a href="{{ wedding_pk.link_facebook }}" class="social-item" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+</svg>
+                                    </a>
+                                        {% else %}
+                                        <a href="https://m.facebook.com/AmirRestaurant/" class="social-item" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+</svg>
+                                    </a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    {% if wedding_pk.link_telegram %}
+                                        <a href="{{ wedding_pk.link_telegram }}" class="social-item" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+</svg>
+                                    </a>
+                                        {% else %}
+                                        <a href="https://t.me/amir_restoran" class="social-item" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+</svg>
+                                    </a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    {% if wedding_pk.link_inst %}
+                                        <a href="{{ wedding_pk.link_inst }}" class="social-item" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+</svg>
+                                    </a>
+                                        {% else %}
+                                        <a href="https://instagram.com/restaurant.amir?igshid=MzRlODBiNWFlZA==" class="social-item" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+</svg>
+                                    </a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                <div style="display: flex; justify-content: center; list-style: none; margin-right: 25px">
+        {% if wedding_pk.restaurant %}
+         {{ wedding_pk.restaurant }}
+            {% else %}
+            Amir Restaurant
+        {% endif %}
+                    © 2023&nbsp;<a href="https://www.instagram.com/shaam.uz/">BrightLab.uz</a>
+                </div>
+			</footer>
+			<!-- /footer -->
+		</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        var forms = document.querySelectorAll('#appeal-form');
+
+        forms.forEach(function (form) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(form);
+
+                try {
+                    const response = await fetch('{% url 'singers' pk=wedding_pk.pk %}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Успешный запрос
+                        console.log('Success');
+                        var inputElement = document.getElementById('guests').value;
+                        var inputText = document.getElementById('text-comment').value;
+                        var inputName = document.getElementById('name-comment').value;
+                        let guest_number;
+                        if (inputName === '') {
+                            inputName = 'Неизвестно'
+                        }
+                        if (inputElement === '') {
+                            guest_number = ''
+                        } else {
+                            guest_number = ` | ${inputElement} стол`
+                        }
+                        var currentDate = new Date();
+                        var day = currentDate.getDate();
+                        var month = currentDate.toLocaleString('default', {month: 'long'});
+                        var year = currentDate.getFullYear();
+                        var hours = currentDate.getHours();
+                        var minutes = currentDate.getMinutes();
+                        var formattedMinutes = minutes.toString().padStart(2, '0');
+                        var element = document.getElementById('commet_id');
+                        var nocomments = document.getElementById('no-comments');
+                        var newComment = document.createElement("div");
+                        if (element) {
+                            newComment.innerHTML += `<div id="commet_id" class="media" style="padding-bottom: 10px">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="{% static 'img/user.png' %}" alt="">
+                </a>
+                <div class="media-body">
+                        <h4 class="media-heading">${inputName}
+                        <small>${day} ${month} ${year} г. ${hours}:${formattedMinutes}
+                                              ${guest_number}
+                         </small>
+                    </h4>
+                    ${inputText}
+                </div>`;
+                            element.insertBefore(newComment, element.firstChild);
+                        } else {
+                            newComment.innerHTML += `<div id="commet_id" class="media" style="padding-bottom: 10px">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="{% static 'img/user.png' %}" alt="">
+                </a>
+                <div class="media-body">
+                        <h4 class="media-heading">${inputName}
+                        <small>${day} ${month} ${year} г. ${hours}:${formattedMinutes}
+                                              ${guest_number}
+                         </small>
+                    </h4>
+                    ${inputText}
+                </div>`;
+                            nocomments.insertBefore(newComment, nocomments.firstChild);
+                            document.getElementById('no-comments-text').innerText = 'Комментарии'
+                        }
+                        document.getElementById('guests').value = '';
+                        document.getElementById('text-comment').value = '';
+                        document.getElementById('name-comment').value = '';
+                        alert('Успешно отправлено!')
+
+                    } else {
+                        // Обработка ошибок
+                        console.error('Error:', response.status);
+                        // Здесь вы можете обработать различные сценарии ошибок в ответе от сервера
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    // Обработка ошибок при выполнении запроса
+                }
+            });
+        });
+    </script>
+{% endblock %}
