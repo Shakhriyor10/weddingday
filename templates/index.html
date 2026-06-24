@@ -57,7 +57,7 @@
 	<!-- background-slideshow -->
 	<div class="bg-slideshow">
 		<!-- slideshow-item -->
-		<div class="page-background viewport desktop" id="slideshowBackground"></div>
+		<div class="page-background viewport" id="slideshowBackground" style="background-image: url('{% static 'img/mob-backg.jpg' %}')"></div>
 		<!-- /slideshow-item -->
 	</div>
 	<!--/Background-slideshow -->
@@ -134,7 +134,7 @@
 <script>
     // Проверка на мобильные устройства
     function isMobileDevice() {
-        return window.innerWidth <= 768;
+        return window.matchMedia('(max-width: 1000px)').matches;
     }
 
     // Массивы с путями к изображениям для мобильных и настольных устройств
@@ -148,22 +148,24 @@
         var mobileImages = [
         {% if wedding_photo %}
         {% for photo in wedding_photo %}
-            "{{ photo.mob_photo.url }}",
+            "{{ photo.mob_photo.url|escapejs }}",
         {% endfor %}
-        {% else %}
-            "{% static 'img/wedding-hero-mobile.webp' %}"
-    {% endif %}
+        {% endif %}
+            "{% static 'img/wedding-hero-mobile.webp' %}",
+            "{% static 'img/mob-backg.jpg' %}"
     ];
 
     var desktopImages = [
         "{% static 'img/wedding-hero-ballroom.webp' %}",
-        "{% static 'img/wedding-hero-garden.webp' %}"
+        "{% static 'img/wedding-hero-garden.webp' %}",
+        "{% static 'img/backg.jpg' %}"
     ];
 
     // Установка фотографий в слайдшоу
     var slideshowItem = document.querySelector('.bg-slideshow .page-background');
     var currentIndex = 0;
     var images;
+    var availableImages = [];
 
     if (isMobileDevice()) {
         images = mobileImages;
@@ -172,30 +174,41 @@
     }
 
     // Предварительная загрузка изображений
-    function preloadImages() {
-        for (var i = 0; i < images.length; i++) {
-            var img = new Image();
-            img.src = images[i];
+    function showNextBackground() {
+        if (!availableImages.length) return;
+        slideshowItem.style.backgroundImage = "url('" + availableImages[currentIndex] + "')";
+        currentIndex = (currentIndex + 1) % availableImages.length;
+    }
+
+    function startSlideshow() {
+        if (!availableImages.length) return;
+        currentIndex = 0;
+        showNextBackground();
+        if (availableImages.length > 1) {
+            window.setInterval(showNextBackground, 5000);
         }
     }
 
-    // Задержка перед установкой фонового изображения
-    function setDelayedBackground() {
-        setTimeout(function() {
-            changeBackground();
-            setInterval(changeBackground, 5000); // Изменение изображения каждые 5 секунд
-        }, 1000); // Задержка в 1 секунду перед установкой первого фонового изображения
+    function preloadUsableImages() {
+        var remaining = images.length;
+        if (!remaining) return;
+
+        images.forEach(function (url) {
+            var img = new Image();
+            img.onload = function () {
+                availableImages.push(url);
+                remaining -= 1;
+                if (remaining === 0) startSlideshow();
+            };
+            img.onerror = function () {
+                remaining -= 1;
+                if (remaining === 0) startSlideshow();
+            };
+            img.src = url;
+        });
     }
 
-    // Запуск предварительной загрузки и установки фонового изображения
-    preloadImages();
-    setDelayedBackground();
-
-    // Установка фонового изображения
-    function changeBackground() {
-        slideshowItem.style.backgroundImage = "url('" + images[currentIndex] + "')";
-        currentIndex = (currentIndex + 1) % images.length;
-    }
+    preloadUsableImages();
 </script>
 <script>
 (function () {

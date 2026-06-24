@@ -60,12 +60,6 @@ $('.hd-list-menu li').on({
 });
                 
 
-//Home Slideshow
-$('.bg-slideshow').cycle({
-  speed: 1600,
-    slides: '> div'
-});
-
 //Active Page
 var str=location.href.toLowerCase();
 $(".hd-list-menu li a").each(function() {
