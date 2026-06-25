@@ -1,10 +1,11 @@
 from datetime import timedelta
+from datetime import time
 
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from wedding.models import CommentWedding, WeddingDay
+from wedding.models import CommentWedding, WeddingDay, WeddingDishes
 
 
 class WeddingCommentTests(TestCase):
@@ -72,3 +73,20 @@ class WeddingCommentTests(TestCase):
         )
 
         self.assertContains(response, "img/oz-monogram.webp")
+
+    def test_kitchen_shows_third_dishes_section(self):
+        WeddingDishes.objects.create(
+            wedding=self.first_wedding,
+            title="Uchinchi maxsus taom",
+            description="Mehmonlar uchun alohida taom",
+            photo="photo/third-dish.jpg",
+            time=time(21, 30),
+            dishes_type="third_dishes",
+        )
+
+        response = self.client.get(
+            reverse("hot_appetizers", kwargs={"pk": self.first_wedding.pk})
+        )
+
+        self.assertContains(response, "Uchinchi taom")
+        self.assertContains(response, "Uchinchi maxsus taom")

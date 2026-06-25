@@ -11,6 +11,7 @@ DISHES_TYPE = (
     ('hot_snack', 'Горячая закуска'),
     ('dishes', 'Первое блюдо'),
     ('second_dishes', 'Второе блюдо'),
+    ('third_dishes', 'Третье блюдо'),
     ('desert', 'Десерты'),
 )
 

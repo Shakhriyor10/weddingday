@@ -106,6 +106,7 @@ class HotAppetizersList(WeddingCommentMixin, TemplateView):
                 "kitchen": dishes.filter(dishes_type="hot_snack"),
                 "dishes": dishes.filter(dishes_type="dishes"),
                 "second_dishes": dishes.filter(dishes_type="second_dishes"),
+                "third_dishes": dishes.filter(dishes_type="third_dishes"),
                 "desert": dishes.filter(dishes_type="desert"),
                 "wedding_photo": Slider.objects.filter(wedding=wedding, status=True),
             }
