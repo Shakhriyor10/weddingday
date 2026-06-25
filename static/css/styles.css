@@ -477,6 +477,16 @@ a:hover {
   position: relative;
   z-index: 5;
 }
+#spa-container {
+  transition: opacity .22s ease, transform .22s ease, filter .22s ease;
+  will-change: opacity, transform;
+}
+#body.spa-is-loading #spa-container {
+  opacity: .35;
+  transform: translateY(8px);
+  filter: blur(1px);
+  pointer-events: none;
+}
 /* ==========================================================
 ! Tipography
 ========================================================== */

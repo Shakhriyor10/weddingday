@@ -71,7 +71,7 @@
 <!-- Main Content
 ================================================== -->
 <div id="body" class="viewport animated">
-	<div class="container">
+	<div id="spa-container" class="container">
         {% block content %}
 
         {% endblock %}
@@ -533,8 +533,11 @@ canvas.addEventListener( 'mouseup', function( e ) {
 window.onload = loop;
 }());
 </script>
+<div id="spa-extra-scripts" hidden>
 {% block extra_js %}
 
 {% endblock %}
+</div>
+<script src="{% static 'js/spa-navigation.js' %}?v=6"></script>
 </body>
 </html>

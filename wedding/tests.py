@@ -74,6 +74,14 @@ class WeddingCommentTests(TestCase):
 
         self.assertContains(response, "img/oz-monogram.webp")
 
+    def test_base_page_includes_spa_navigation_assets(self):
+        response = self.client.get(
+            reverse("home", kwargs={"pk": self.first_wedding.pk})
+        )
+
+        self.assertContains(response, 'id="spa-container"')
+        self.assertContains(response, "js/spa-navigation.js")
+
     def test_kitchen_shows_third_dishes_section(self):
         WeddingDishes.objects.create(
             wedding=self.first_wedding,
