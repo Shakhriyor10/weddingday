@@ -1,13 +1,62 @@
-<script>
+﻿<script>
 (function () {
     const form = document.getElementById('wedding-comment-form');
-    if (!form) return;
-
     const list = document.getElementById('comments-list');
+
+    function getCookie(name) {
+        const value = '; ' + document.cookie;
+        const parts = value.split('; ' + name + '=');
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function wireDeleteButton(button) {
+        button.addEventListener('click', async function () {
+            if (!window.confirm("Izohni o'chirishni tasdiqlaysizmi?")) return;
+
+            button.disabled = true;
+            try {
+                const response = await fetch(button.dataset.deleteUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken') || '',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || "Izohni o'chirib bo'lmadi");
+
+                const card = button.closest('[data-comment-id]');
+                if (card) card.remove();
+                if (list && !list.querySelector('[data-comment-id]')) {
+                    const empty = document.createElement('p');
+                    empty.id = 'comments-empty';
+                    empty.className = 'comments-empty';
+                    empty.textContent = "Hozircha izohlar yo'q. Birinchi bo'lib izoh qoldiring";
+                    list.appendChild(empty);
+                }
+            } catch (error) {
+                alert(error.message);
+                button.disabled = false;
+            }
+        });
+    }
+
+    function createDeleteButton(comment) {
+        if (!comment.can_delete || !comment.delete_url) return null;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'comment-delete-button';
+        button.dataset.deleteUrl = comment.delete_url;
+        button.setAttribute("aria-label", "Izohni o'chirish");
+        button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 7h2v8h-2v-8Zm4 0h2v8h-2v-8ZM7 8h10l-1 13H8L7 8Z"/></svg>';
+        wireDeleteButton(button);
+        return button;
+    }
 
     function createCommentCard(comment) {
         const card = document.createElement('article');
         card.className = 'comment-card comment-card-new';
+        card.dataset.commentId = comment.id;
 
         const avatar = document.createElement('div');
         avatar.className = 'comment-avatar';
@@ -18,11 +67,6 @@
         body.className = 'comment-card-body';
         const heading = document.createElement('h4');
         heading.textContent = comment.name || 'Mehmon';
-        if (comment.table) {
-            const table = document.createElement('small');
-            table.textContent = ' · stol ' + comment.table;
-            heading.appendChild(table);
-        }
 
         const text = document.createElement('p');
         text.textContent = comment.text;
@@ -30,12 +74,18 @@
         time.textContent = new Intl.DateTimeFormat('ru-RU', {
             day: '2-digit', month: '2-digit', year: 'numeric',
             hour: '2-digit', minute: '2-digit'
-        }).format(new Date(comment.date_time)).replace(',', ' ·');
+        }).format(new Date(comment.date_time)).replace(',', ' -');
 
         body.append(heading, text, time);
+        const deleteButton = createDeleteButton(comment);
+        if (deleteButton) body.appendChild(deleteButton);
         card.append(avatar, body);
         return card;
     }
+
+    document.querySelectorAll('.comment-delete-button').forEach(wireDeleteButton);
+
+    if (!form) return;
 
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -49,22 +99,23 @@
         }
 
         button.disabled = true;
-        status.textContent = 'Izoh saqlanmoqda…';
+        status.textContent = 'Izoh saqlanmoqda...';
 
         try {
+            const formData = new FormData(form);
             const response = await fetch(form.action, {
                 method: 'POST',
-                body: new FormData(form),
+                body: formData,
                 headers: {'X-Requested-With': 'XMLHttpRequest'}
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.message || 'Izohni yuborib bo‘lmadi');
+            if (!response.ok) throw new Error(data.message || "Izohni yuborib bo'lmadi");
 
             const empty = document.getElementById('comments-empty');
             if (empty) empty.remove();
-            list.prepend(createCommentCard(data.comment));
+            if (list) list.prepend(createCommentCard(data.comment));
             form.reset();
-            status.textContent = 'Rahmat! Izoh saqlandi ♡';
+            status.textContent = 'Rahmat! Izoh saqlandi';
             window.setTimeout(function () { status.textContent = ''; }, 4000);
         } catch (error) {
             status.textContent = error.message;

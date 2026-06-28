@@ -1,17 +1,24 @@
-<section class="comments-section" aria-labelledby="comments-title">
+﻿<section class="comments-section" aria-labelledby="comments-title">
     <h4 id="comments-title" class="blog-comments-title">Izohlar</h4>
     <div id="comments-list" class="comments-list">
         {% for comment in comments %}
-            <article class="comment-card">
+            <article class="comment-card" data-comment-id="{{ comment.pk }}">
                 <div class="comment-avatar" aria-hidden="true">{{ comment.name|default:'M'|first|upper }}</div>
                 <div class="comment-card-body">
-                    <h4>{{ comment.name|default:'Mehmon' }}{% if comment.table %}<small> · stol {{ comment.table }}</small>{% endif %}</h4>
+                    <h4>{{ comment.name|default:'Mehmon' }}</h4>
                     <p>{{ comment.text }}</p>
-                    <time>{{ comment.date_time|date:'d.m.Y · H:i' }}</time>
+                    <time>{{ comment.date_time|date:'d.m.Y - H:i' }}</time>
+                    {% if comment.can_delete %}
+                        <button type="button" class="comment-delete-button" data-delete-url="{% url 'delete_comment' pk=wedding_pk.pk comment_pk=comment.pk %}" aria-label="Izohni o'chirish">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 7h2v8h-2v-8Zm4 0h2v8h-2v-8ZM7 8h10l-1 13H8L7 8Z"/>
+                            </svg>
+                        </button>
+                    {% endif %}
                 </div>
             </article>
         {% empty %}
-            <p id="comments-empty" class="comments-empty">Hozircha izohlar yo‘q. Birinchi bo‘lib izoh qoldiring ✨</p>
+            <p id="comments-empty" class="comments-empty">Hozircha izohlar yo'q. Birinchi bo'lib izoh qoldiring</p>
         {% endfor %}
     </div>
 </section>

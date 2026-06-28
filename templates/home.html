@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+﻿{% extends 'index.html' %}
 {% load poll_extras %}
 {% load static %}
 
@@ -23,7 +23,7 @@
                                     {% else %}
                                     <span class="link-title" style="font-family: Athelas">Bugungi taomlar</span>
                                 {% endif %}
-{#				        		<span class="link-subtitle">Блюда</span>#}
+{#				        		<span class="link-subtitle">Р‘Р»СЋРґР°</span>#}
 				        	</a>
 				        </li>
 
@@ -32,9 +32,9 @@
 				    </nav>
                     <div class="hd-logo">
                         {% if wedding.logo %}
-                            <a href="{% url 'home' wedding.pk %}" aria-label="Bosh sahifa"><img src="{{ wedding.logo.url }}" class="logo-img custom-wedding-logo" title="{{ wedding.groom_name }}{% if wedding.bride_name %} va {{ wedding.bride_name }}{% endif %}" alt="To‘y logotipi"></a>
+                            <a href="{% url 'home' wedding.pk %}" aria-label="Bosh sahifa"><img src="{{ wedding.logo.url }}" class="logo-img custom-wedding-logo" title="{{ wedding.groom_name }}{% if wedding.bride_name %} va {{ wedding.bride_name }}{% endif %}" alt="To'y logotipi"></a>
                         {% else %}
-                            <a href="{% url 'home' wedding.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
+                            <a href="{% url 'home' wedding.pk %}" aria-label="Ozoda va Zarmina - bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
                         {% endif %}
 				    </div>
                     <nav class="hd-nav nav navbar-nav navbar-right navbar-collapse">
@@ -44,9 +44,9 @@
                                 {% if wedding.second_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding.second_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">San’atkorlar va boshlovchilar</span>
+                                    <span class="link-title" style="font-family: Athelas">San'atkorlar va boshlovchilar</span>
                                 {% endif %}
-{#				        		<span class="link-subtitle">Блюда</span>#}
+{#				        		<span class="link-subtitle">Р‘Р»СЋРґР°</span>#}
 				        	</a>
 				        </li>
 
@@ -66,13 +66,13 @@
 {#                    <a href="{% url 'home' %}"><img src="{% static 'img/logo_3.png' %}" title="" alt="" style="width: 10%;"></a>#}
 {#                </li>#}
 {#                <li>#}
-{#                    Кухня#}
+{#                    РљСѓС…РЅСЏ#}
 {#                </li>#}
 {#                <li>#}
-{#                    Артисты и ведущие#}
+{#                    РђСЂС‚РёСЃС‚С‹ Рё РІРµРґСѓС‰РёРµ#}
 {#                </li>#}
 {#                <li>#}
-{#                    Персонал#}
+{#                    РџРµСЂСЃРѕРЅР°Р»#}
 {#                </li>#}
 {##}
 {#            </ul>#}
@@ -137,21 +137,21 @@
 						</div>
                         {% endif %}
 {#                    {% if wedding.wedding_kids.all|get_by_index:0 %}#}
-{#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Суннат туй</p>#}
+{#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">РЎСѓРЅРЅР°С‚ С‚СѓР№</p>#}
 {#                        {% else %}#}
 {#                        {% if wedding.wedding_type == 'fotha_tuy' %}#}
-{#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Фотиха Туй</p>#}
+{#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Р¤РѕС‚РёС…Р° РўСѓР№</p>#}
 {#                        {% endif %}#}
-{#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">День свадьбы</p>#}
+{#                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Р”РµРЅСЊ СЃРІР°РґСЊР±С‹</p>#}
 {#                    {% endif %}#}
                     {% if wedding.wedding_type == 'wedding' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">To‘y kuni</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">To'y kuni</p>
                         {% elif wedding.wedding_type == 'wedding_young' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Sunnat to‘yi</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Sunnat to'yi</p>
                         {% elif wedding.wedding_type == 'fotha_tuy' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Fotiha to‘yi</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Fotiha to'yi</p>
                         {% elif wedding.wedding_type == 'sunnat_tuy_and_musargiron' %}
-                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Sunnat to‘yi va Mu’sar giron</p>
+                        <p style="font-size: 25px; font-family: Athelas" class="countdown-title ">Sunnat to'yi va Mu'sar giron</p>
                     {% endif %}
 						<h2 class="countdown-title countdown-title1"><span class="countdown-title-borders" style="font-family: Athelas">{{ wedding.date|date:'d/m/Y' }} | {{ wedding.date|date:'H:i' }}</span></h2>
 						<!-- /countdown title top -->
@@ -179,44 +179,48 @@
                 <div class="wishes-heading">
                     <span class="wishes-kicker">Tilaklar kitobi</span>
                     <h2 id="wishes-title">Iliq tilaklaringizni qoldiring</h2>
-                    <p>Tilagingiz aynan {{ wedding.groom_name }}{% if wedding.bride_name %} va {{ wedding.bride_name }}{% endif %} to‘yi uchun saqlanadi.</p>
+                    <p>Tilagingiz aynan {{ wedding.groom_name }}{% if wedding.bride_name %} va {{ wedding.bride_name }}{% endif %} to'yi uchun saqlanadi.</p>
                 </div>
 
-                {% if current_datetime > wedding_date and current_datetime < end_date %}
+                {% if comments_open %}
                     <form id="home-comment-form" class="wishes-form" method="post" action="{% url 'home' wedding.pk %}">
                         {% csrf_token %}
                         <div class="wishes-form-row">
                             <label>Ismingiz
-                                <input type="text" name="name" maxlength="255" placeholder="Bo‘sh qoldirish mumkin">
-                            </label>
-                            <label>Stol raqami
-                                <input type="number" name="table" min="1" placeholder="Majburiy emas">
+                                <input type="text" name="name" maxlength="255" placeholder="Bo'sh qoldirish mumkin">
                             </label>
                         </div>
                         <label>Tilak
-                            <textarea name="text" rows="4" maxlength="2000" required placeholder="Yangi turmush qurganlarga bir nechta ezgu so‘z yozing…"></textarea>
+                            <textarea name="text" rows="4" maxlength="2000" required placeholder="Yangi turmush qurganlarga bir nechta ezgu so'z yozing..."></textarea>
                         </label>
-                        <button type="submit" class="wishes-button">Mehr bilan yuborish <span aria-hidden="true">♡</span></button>
+                        <button type="submit" class="wishes-button">Mehr bilan yuborish</button>
                         <p id="home-comment-status" class="wishes-status" role="status" aria-live="polite"></p>
                     </form>
-                {% elif current_datetime <= wedding_date %}
-                    <p class="wishes-notice">Tilaklar kitobi to‘y kuni ochiladi.</p>
+                {% elif current_datetime < comment_start_date %}
+                    <p class="wishes-notice">Tilaklar kitobi to'ydan 7 kun oldin ochiladi.</p>
                 {% else %}
                     <p class="wishes-notice">Tilaklar kitobi yopilgan, ammo iliq xotiralar abadiy qoladi.</p>
                 {% endif %}
 
                 <div id="home-comments" class="wishes-list">
                     {% for comment in comments %}
-                        <article class="wish-card">
+                        <article class="wish-card" data-comment-id="{{ comment.pk }}">
                             <div class="wish-avatar" aria-hidden="true">{{ comment.name|default:'M'|first|upper }}</div>
                             <div>
-                                <h3>{{ comment.name|default:'Mehmon' }}{% if comment.table %}<small> · stol {{ comment.table }}</small>{% endif %}</h3>
+                                <h3>{{ comment.name|default:'Mehmon' }}</h3>
                                 <p>{{ comment.text }}</p>
-                                <time>{{ comment.date_time|date:'d.m.Y · H:i' }}</time>
+                                <time>{{ comment.date_time|date:'d.m.Y - H:i' }}</time>
+                                {% if comment.can_delete %}
+                                    <button type="button" class="comment-delete-button" data-delete-url="{% url 'delete_comment' pk=wedding.pk comment_pk=comment.pk %}" aria-label="Izohni o'chirish">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                            <path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 7h2v8h-2v-8Zm4 0h2v8h-2v-8ZM7 8h10l-1 13H8L7 8Z"/>
+                                        </svg>
+                                    </button>
+                                {% endif %}
                             </div>
                         </article>
                     {% empty %}
-                        <p id="home-no-comments" class="wishes-empty">Birinchi bo‘lib tilak qoldiring ✨</p>
+                        <p id="home-no-comments" class="wishes-empty">Birinchi bo'lib tilak qoldiring</p>
                     {% endfor %}
                 </div>
             </section>
@@ -271,7 +275,7 @@
                                 </li>
                             </ul>
     <div style="display: flex; justify-content: center; list-style: none; margin-right: 25px">
-                    © 2023&nbsp;<a href="https://t.me/shaxriyor_10/" target="_blank" rel="noopener noreferrer">brightlab.uz</a>
+                    (c) 2023&nbsp;<a href="https://t.me/shaxriyor_10/" target="_blank" rel="noopener noreferrer">brightlab.uz</a>
                 </div>
 			</footer>
 			<!-- /footer -->
@@ -282,14 +286,63 @@
 <script>
 (function () {
     const form = document.getElementById('home-comment-form');
-    if (!form) return;
-
     const status = document.getElementById('home-comment-status');
     const comments = document.getElementById('home-comments');
+
+    function getCookie(name) {
+        const value = '; ' + document.cookie;
+        const parts = value.split('; ' + name + '=');
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function wireDeleteButton(button) {
+        button.addEventListener('click', async function () {
+            if (!window.confirm("Izohni o'chirishni tasdiqlaysizmi?")) return;
+
+            button.disabled = true;
+            try {
+                const response = await fetch(button.dataset.deleteUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken') || '',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || "Izohni o'chirib bo'lmadi");
+
+                const card = button.closest('[data-comment-id]');
+                if (card) card.remove();
+                if (comments && !comments.querySelector('[data-comment-id]')) {
+                    const empty = document.createElement('p');
+                    empty.id = 'home-no-comments';
+                    empty.className = 'wishes-empty';
+                    empty.textContent = "Birinchi bo'lib tilak qoldiring";
+                    comments.appendChild(empty);
+                }
+            } catch (error) {
+                alert(error.message);
+                button.disabled = false;
+            }
+        });
+    }
+
+    function createDeleteButton(comment) {
+        if (!comment.can_delete || !comment.delete_url) return null;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'comment-delete-button';
+        button.dataset.deleteUrl = comment.delete_url;
+        button.setAttribute("aria-label", "Izohni o'chirish");
+        button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 7h2v8h-2v-8Zm4 0h2v8h-2v-8ZM7 8h10l-1 13H8L7 8Z"/></svg>';
+        wireDeleteButton(button);
+        return button;
+    }
 
     function createCommentCard(comment) {
         const card = document.createElement('article');
         card.className = 'wish-card wish-card-new';
+        card.dataset.commentId = comment.id;
 
         const avatar = document.createElement('div');
         avatar.className = 'wish-avatar';
@@ -299,11 +352,6 @@
         const content = document.createElement('div');
         const heading = document.createElement('h3');
         heading.textContent = comment.name || 'Mehmon';
-        if (comment.table) {
-            const table = document.createElement('small');
-            table.textContent = ' · stol ' + comment.table;
-            heading.appendChild(table);
-        }
 
         const text = document.createElement('p');
         text.textContent = comment.text;
@@ -311,18 +359,24 @@
         time.textContent = new Intl.DateTimeFormat('ru-RU', {
             day: '2-digit', month: '2-digit', year: 'numeric',
             hour: '2-digit', minute: '2-digit'
-        }).format(new Date(comment.date_time)).replace(',', ' ·');
+        }).format(new Date(comment.date_time)).replace(',', ' -');
 
         content.append(heading, text, time);
+        const deleteButton = createDeleteButton(comment);
+        if (deleteButton) content.appendChild(deleteButton);
         card.append(avatar, content);
         return card;
     }
+
+    document.querySelectorAll('.comment-delete-button').forEach(wireDeleteButton);
+
+    if (!form) return;
 
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
         const button = form.querySelector('button[type="submit"]');
         button.disabled = true;
-        status.textContent = 'Tilak saqlanmoqda…';
+        status.textContent = 'Tilak saqlanmoqda...';
 
         try {
             const response = await fetch(form.action, {
@@ -331,9 +385,9 @@
                 headers: {'X-Requested-With': 'XMLHttpRequest'}
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.message || 'Tilakni yuborib bo‘lmadi');
+            if (!response.ok) throw new Error(data.message || "Tilakni yuborib bo'lmadi");
 
-            status.textContent = 'Rahmat! Tilagingiz saqlandi ♡';
+            status.textContent = 'Rahmat! Tilagingiz saqlandi';
             form.reset();
             const emptyState = document.getElementById('home-no-comments');
             if (emptyState) emptyState.remove();

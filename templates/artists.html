@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+﻿{% extends 'index.html' %}
 {% load static %}
 
 
@@ -25,7 +25,7 @@
                                     {% else %}
                                     <span class="link-title" style="font-family: Athelas">Bugungi taomlar</span>
                                 {% endif %}
-{#				        		<span class="link-subtitle">Блюда</span>#}
+{#				        		<span class="link-subtitle">Р‘Р»СЋРґР°</span>#}
 				        	</a>
 				        </li>
 
@@ -34,9 +34,9 @@
 				    </nav>
                     <div class="hd-logo">
                         {% if wedding_pk.logo %}
-                            <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Bosh sahifa"><img src="{{ wedding_pk.logo.url }}" class="logo-img custom-wedding-logo" title="{{ wedding_pk.groom_name }}{% if wedding_pk.bride_name %} va {{ wedding_pk.bride_name }}{% endif %}" alt="To‘y logotipi"></a>
+                            <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Bosh sahifa"><img src="{{ wedding_pk.logo.url }}" class="logo-img custom-wedding-logo" title="{{ wedding_pk.groom_name }}{% if wedding_pk.bride_name %} va {{ wedding_pk.bride_name }}{% endif %}" alt="To'y logotipi"></a>
                         {% else %}
-                            <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Ozoda va Zarmina — bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
+                            <a href="{% url 'home' pk=wedding_pk.pk %}" aria-label="Ozoda va Zarmina - bosh sahifa"><img src="{% static 'img/oz-monogram.webp' %}" class="logo-img oz-monogram" title="Ozoda va Zarmina" alt="OZ monogrammasi"></a>
                         {% endif %}
 {#				      <a href="{% url 'home' pk=wedding_pk.pk %}"><img src="{% static 'img/logo_3.png' %}" class="logo-img" title="" alt=""></a>#}
 				    </div>
@@ -47,9 +47,9 @@
 				        		{% if wedding_pk.second_folder %}
                                     <span class="link-title" style="font-family: Athelas">{{ wedding_pk.second_folder }}</span>
                                     {% else %}
-                                    <span class="link-title" style="font-family: Athelas">San’atkorlar va boshlovchilar</span>
+                                    <span class="link-title" style="font-family: Athelas">San'atkorlar va boshlovchilar</span>
                                 {% endif %}
-{#				        		<span class="link-subtitle">Блюда</span>#}
+{#				        		<span class="link-subtitle">Р‘Р»СЋРґР°</span>#}
 				        	</a>
 				        </li>
 
@@ -192,7 +192,7 @@
 						<!-- Section: About Us -->
 						<div class="section-about-us">
 							<!-- Title 1 -->
-							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">San’atkorlar va guruhlar</h1>
+							<h1 class="title1 couple-title1 title1-border" style="font-family: Athelas">San'atkorlar va guruhlar</h1>
 							<!-- /Title 1 -->
 							<div class="row">
 								<!-- Groom -->
@@ -304,30 +304,15 @@
 			</div>
 {% endif %}
 
-{% if current_datetime > wedding_date and current_datetime < end_date %}
+{% if comments_open %}
     <h4 class="blog-comments-title" style="text-align: center">Izoh qoldiring (yana {{ hours }} soat {{ minutes }} daqiqa mavjud):</h4>
     <!-- Comments Form -->
     <div class="well comment-form-card">
         <form role="form" id="wedding-comment-form" class="comment-form" method="post" action="{% url 'singers' pk=wedding_pk.pk %}">
             {% csrf_token %}
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- item -->
-                    <div class="form-group">
-                        <label for="email">Ismingiz:</label>
-                        <input id="name-comment" type="text" name="name" class="form-control" placeholder="Ism (majburiy emas)"/>
-                    </div>
-                    <!-- /item -->
-                </div>
-                <div class="col-md-6">
-                    <!-- item -->
-                    <div class="form-group">
-                        <label for="guests">Stolingiz:</label>
-                        <input type="number" class="form-control" name="table" id="guests"
-                               placeholder="Stol raqami (majburiy emas)">
-                    </div>
-                    <!-- /item -->
-                </div>
+            <div class="form-group">
+                <label for="name-comment">Ismingiz:</label>
+                <input id="name-comment" type="text" name="name" class="form-control" placeholder="Ism (majburiy emas)"/>
             </div>
             <div class="form-group">
                 <label>Matn</label>
@@ -339,10 +324,10 @@
         </form>
     </div>
     {% elif current_datetime > end_date %}
-    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Afsuski, endi izoh qoldirib bo‘lmaydi!
-        Izohlar oynasi to‘y boshlanganidan keyin faqat 24 soat davomida ochiq edi.</h4>
-    {% elif wedding_date > current_datetime %}
-    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">To‘y hali boshlanmadi!</h4>
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Afsuski, endi izoh qoldirib bo'lmaydi!
+        Izohlar oynasi to'ydan keyin faqat 7 kun davomida ochiq edi.</h4>
+    {% elif comment_start_date > current_datetime %}
+    <h4 class="blog-comments-title" style="text-align: center; width: 90%; margin: 0 auto;">Izohlar oynasi to'ydan 7 kun oldin ochiladi!</h4>
 {% endif %}
     {% include '_comment_list.html' %}
         <br>
@@ -398,7 +383,7 @@
                                 </li>
                             </ul>
                 <div style="display: flex; justify-content: center; list-style: none; margin-right: 25px">
-                    © 2023&nbsp;<a href="https://t.me/shaxriyor_10/" target="_blank" rel="noopener noreferrer">brightlab.uz</a>
+                    (c) 2023&nbsp;<a href="https://t.me/shaxriyor_10/" target="_blank" rel="noopener noreferrer">brightlab.uz</a>
                 </div>
 			</footer>
 			<!-- /footer -->
@@ -426,19 +411,13 @@
                     });
 
                     if (response.ok) {
-                        // Успешный запрос
+                        // РЈСЃРїРµС€РЅС‹Р№ Р·Р°РїСЂРѕСЃ
                         console.log('Success');
                         var inputElement = document.getElementById('guests').value;
                         var inputText = document.getElementById('text-comment').value;
                         var inputName = document.getElementById('name-comment').value;
-                        let guest_number;
                         if (inputName === '') {
-                            inputName = 'Noma’lum'
-                        }
-                        if (inputElement === '') {
-                            guest_number = ''
-                        } else {
-                            guest_number = ` | ${inputElement}-stol`
+                            inputName = 'Noma\u2019lum'
                         }
                         var currentDate = new Date();
                         var day = currentDate.getDate();
@@ -458,7 +437,6 @@
                 <div class="media-body">
                         <h4 class="media-heading">${inputName}
                         <small>${day} ${month} ${year}-y. ${hours}:${formattedMinutes}
-                                              ${guest_number}
                          </small>
                     </h4>
                     ${inputText}
@@ -472,7 +450,6 @@
                 <div class="media-body">
                         <h4 class="media-heading">${inputName}
                         <small>${day} ${month} ${year}-y. ${hours}:${formattedMinutes}
-                                              ${guest_number}
                          </small>
                     </h4>
                     ${inputText}
@@ -487,18 +464,18 @@
                         if (oldMessage) oldMessage.remove();
                         var successMessage = document.createElement('p');
                         successMessage.className = 'comment-success-message';
-                        successMessage.textContent = 'Rahmat! Izoh saqlandi ♡';
+                        successMessage.textContent = 'Rahmat! Izoh saqlandi';
                         form.appendChild(successMessage);
                         window.setTimeout(function () { successMessage.remove(); }, 4000);
 
                     } else {
-                        // Обработка ошибок
+                        // РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє
                         console.error('Error:', response.status);
-                        // Здесь вы можете обработать различные сценарии ошибок в ответе от сервера
+                        // Р—РґРµСЃСЊ РІС‹ РјРѕР¶РµС‚Рµ РѕР±СЂР°Р±РѕС‚Р°С‚СЊ СЂР°Р·Р»РёС‡РЅС‹Рµ СЃС†РµРЅР°СЂРёРё РѕС€РёР±РѕРє РІ РѕС‚РІРµС‚Рµ РѕС‚ СЃРµСЂРІРµСЂР°
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    // Обработка ошибок при выполнении запроса
+                    // РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РїСЂРѕСЃР°
                 }
             });
         });

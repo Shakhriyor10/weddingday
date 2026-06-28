@@ -1,4 +1,4 @@
-from datetime import timedelta
+﻿from datetime import timedelta
 from datetime import time
 
 from django.test import TestCase
@@ -12,14 +12,14 @@ class WeddingCommentTests(TestCase):
     def setUp(self):
         wedding_date = timezone.now() - timedelta(hours=1)
         self.first_wedding = WeddingDay.objects.create(
-            groom_name="Алишер",
-            bride_name="Малика",
+            groom_name="РђР»РёС€РµСЂ",
+            bride_name="РњР°Р»РёРєР°",
             date=wedding_date,
             status=True,
         )
         self.second_wedding = WeddingDay.objects.create(
-            groom_name="Шахриёр",
-            bride_name="Зарина",
+            groom_name="РЁР°С…СЂРёС‘СЂ",
+            bride_name="Р—Р°СЂРёРЅР°",
             date=wedding_date,
             status=True,
         )
@@ -27,21 +27,21 @@ class WeddingCommentTests(TestCase):
     def test_comment_is_attached_to_wedding_from_url(self):
         response = self.client.post(
             reverse("hot_appetizers", kwargs={"pk": self.first_wedding.pk}),
-            {"name": "Гость", "table": "7", "text": "Счастья молодым!"},
+            {"name": "Р“РѕСЃС‚СЊ", "text": "РЎС‡Р°СЃС‚СЊСЏ РјРѕР»РѕРґС‹Рј!"},
         )
 
         self.assertEqual(response.status_code, 201)
         comment = CommentWedding.objects.get()
         self.assertEqual(comment.wedding, self.first_wedding)
         self.assertNotEqual(comment.wedding, self.second_wedding)
-        self.assertEqual(comment.table, 7)
+        self.assertIsNone(comment.table)
 
     def test_each_page_uses_its_own_wedding(self):
         self.client.get(reverse("singers", kwargs={"pk": self.first_wedding.pk}))
         self.client.get(reverse("singers", kwargs={"pk": self.second_wedding.pk}))
         self.client.post(
             reverse("singers", kwargs={"pk": self.first_wedding.pk}),
-            {"text": "Комментарий к первой свадьбе"},
+            {"text": "РљРѕРјРјРµРЅС‚Р°СЂРёР№ Рє РїРµСЂРІРѕР№ СЃРІР°РґСЊР±Рµ"},
         )
 
         self.assertEqual(
