@@ -2167,6 +2167,7 @@ body {
 
 .wishes-form label {
   display: block;
+  width: 100%;
   margin-bottom: 15px;
   color: var(--wedding-wine);
   font-size: 12px;
@@ -2186,6 +2187,20 @@ body {
   color: var(--wedding-ink);
   box-shadow: inset 0 1px 2px rgba(45, 20, 24, .04);
   transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.wishes-form input,
+.wishes-form textarea,
+.comment-form .form-group,
+.comment-form .form-control {
+  display: block;
+  width: 100% !important;
+}
+
+.comment-form .row,
+.comment-form .row > div {
+  width: 100%;
+  max-width: 100%;
 }
 
 .wishes-form input {
